@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WeatherAPI.DTOs;
+using VehiclePartsAPI.DTOs;
 
 [ApiController]
 [Route("api/[controller]")]
