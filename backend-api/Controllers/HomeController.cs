@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace WeatherAPI.Controllers;
+namespace VehiclePartsAPI.Controllers;
 
 [ApiController]
 [Route("/")]

@@ -8,10 +8,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace WeatherAPI.Migrations
+namespace VehiclePartsAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260325033839_InitialCreate")]
+    [Migration("20260424180315_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -62,7 +62,6 @@ namespace WeatherAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -170,7 +169,6 @@ namespace WeatherAPI.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

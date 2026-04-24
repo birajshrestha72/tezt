@@ -1,13 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WeatherAPI.DTOs;
+using VehiclePartsAPI.DTOs;
+
 
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
     private readonly AppDbContext _context;
-    public ProductsController(AppDbContext context) => _context = context;
+    private readonly NotificationService _notificationService;
+    public ProductsController(AppDbContext context, NotificationService notificationService)
+    {
+        _context = context;
+        _notificationService = notificationService;
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetAll()
@@ -76,6 +82,10 @@ public class ProductsController : ControllerBase
         };
         _context.Products.Add(product);
         await _context.SaveChangesAsync();
+        if (product.StockQty < 5)
+        {
+            await _notificationService.Add($"Low stock for product {product.Name}");
+        }
         return CreatedAtAction(nameof(GetById), new { id = product.Id }, new ProductDto
         {
             Id = product.Id,
