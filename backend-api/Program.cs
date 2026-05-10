@@ -1,4 +1,6 @@
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
+using VehiclePartsAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +28,9 @@ builder.Services.AddCors(options =>
 
 builder.Services.Configure<ExternalServicesOptions>(builder.Configuration.GetSection("ExternalServices"));
 
+// ── BIRAJ (M2) services ────────────────────────────────────────────────────
+builder.Services.AddScoped<StockAlertService>();
+// ── RABIN (M3) adds LoyaltyService + EmailService below this line ───────────
 
 
 var app = builder.Build();
@@ -43,6 +48,10 @@ using (var scope = app.Services.CreateScope())
         Console.WriteLine(" Database connection failed!");
     }
 }
+
+RecurringJob.AddOrUpdate<StockAlertService>(
+    "stock-alert-hourly", svc => svc.CheckAndNotifyAsync(), Cron.Hourly);
+// ── SAKSHAM (M5) adds RecurringJob for CreditReminderService below ──────────
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

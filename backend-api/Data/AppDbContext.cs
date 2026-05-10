@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using VehiclePartsAPI.models;
 
 public class AppDbContext : DbContext
 {
@@ -15,6 +16,14 @@ public class AppDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderItem> OrderItems { get; set; }
 
+    // ── BIRAJ (M2) DbSets ────────────────────────────────────────────────────
+    public DbSet<PartCategory>      PartCategories     => Set<PartCategory>();
+    public DbSet<Part>              Parts              => Set<Part>();
+    public DbSet<StockMovement>     StockMovements     => Set<StockMovement>();
+    public DbSet<PurchaseOrder>     PurchaseOrders     => Set<PurchaseOrder>();
+    public DbSet<PurchaseOrderItem> PurchaseOrderItems => Set<PurchaseOrderItem>();
+    // ── RABIN (M3) adds: SaleInvoices, SaleInvoiceItems, CreditPayments
+    // ── AYUSH (M4) adds: Customers, VehicleModels, Vehicles, Appointments, PartRequests, Reviews
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -58,5 +67,16 @@ public class AppDbContext : DbContext
             .WithOne(oi => oi.Product)
             .HasForeignKey(oi => oi.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // ── BIRAJ (M2) EF configs ────────────────────────────────────────────
+        modelBuilder.Entity<Part>()
+            .HasOne(p => p.Supplier).WithMany()
+            .HasForeignKey(p => p.SupplierId).OnDelete(DeleteBehavior.SetNull);
+        modelBuilder.Entity<Part>()
+            .HasOne(p => p.Category).WithMany(c => c.Parts)
+            .HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.SetNull);
+        modelBuilder.Entity<PurchaseOrderItem>()
+            .HasIndex(i => new { i.PurchaseOrderId, i.PartId }).IsUnique();
+        // ── RABIN (M3) adds EF configs below ─────────────────────────────
     }
 }
