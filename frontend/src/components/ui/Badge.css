@@ -1,0 +1,16 @@
+.wm-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.wm-badge--success { background: var(--success-bg); color: var(--success); }
+.wm-badge--warning { background: var(--warning-bg); color: var(--warning-dark); }
+.wm-badge--danger { background: var(--danger-bg); color: var(--danger); }
+.wm-badge--info { background: var(--info-bg); color: var(--info); }
+.wm-badge--neutral { background: var(--page-bg); color: var(--text-secondary); border: 1px solid var(--border); }
+.wm-badge--loyalty { background: var(--loyalty-bg); color: var(--loyalty); }

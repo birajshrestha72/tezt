@@ -16,6 +16,9 @@ public class AppDbContext : DbContext
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Notification> Notifications { get; set; }
 
+    public DbSet<Staff> Staff { get; set; }
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Composite Key: OrderItem
