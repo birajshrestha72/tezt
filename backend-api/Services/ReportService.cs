@@ -1,12 +1,15 @@
 using Microsoft.EntityFrameworkCore;
+using VehiclePartsAPI.DTOs;
 
 public class ReportService : IReportService
 {
     private readonly AppDbContext _context;
+    private readonly CreditReminderService _creditReminderService;
 
-    public ReportService(AppDbContext context)
+    public ReportService(AppDbContext context, CreditReminderService creditReminderService)
     {
         _context = context;
+        _creditReminderService = creditReminderService;
     }
 
     public async Task<object> GetFinancialReport()
@@ -21,6 +24,18 @@ public class ReportService : IReportService
         {
             totalRevenue,
             totalOrders
+        };
+    }
+
+    public async Task<object> GetCreditReminderReport()
+    {
+        CreditReminderSummaryDto summary = await _creditReminderService.GetSummary();
+        return new
+        {
+            summary.OverdueOrders,
+            summary.OverdueCustomers,
+            summary.TotalOutstandingAmount,
+            summary.Reminders
         };
     }
 }

@@ -17,6 +17,8 @@ public class OrdersController : ControllerBase
             {
                 Id = o.Id,
                 OrderDate = o.OrderDate,
+                CreditDueDate = o.CreditDueDate,
+                AmountPaid = o.AmountPaid,
                 Status = o.Status,
                 CustomerId = o.CustomerId,
                 ItemCount = o.OrderItems.Count
@@ -39,6 +41,8 @@ public class OrdersController : ControllerBase
         {
             Id = order.Id,
             OrderDate = order.OrderDate,
+            CreditDueDate = order.CreditDueDate,
+            AmountPaid = order.AmountPaid,
             Status = order.Status,
             CustomerId = order.CustomerId,
             OrderItems = order.OrderItems.Select(oi => new OrderItemSummaryDto
@@ -96,6 +100,8 @@ public class OrdersController : ControllerBase
         var order = new Order
         {
             OrderDate = dto.OrderDate,
+            CreditDueDate = dto.CreditDueDate ?? dto.OrderDate.AddDays(30),
+            AmountPaid = dto.AmountPaid,
             Status = dto.Status,
             CustomerId = dto.CustomerId,
             OrderItems = dto.Items?.Select(i => new OrderItem
@@ -113,6 +119,8 @@ public class OrdersController : ControllerBase
         {
             Id = order.Id,
             OrderDate = order.OrderDate,
+            CreditDueDate = order.CreditDueDate,
+            AmountPaid = order.AmountPaid,
             Status = order.Status,
             CustomerId = order.CustomerId,
             ItemCount = order.OrderItems?.Count ?? 0
@@ -147,6 +155,8 @@ public class OrdersController : ControllerBase
         if (order == null) return NotFound();
 
         order.OrderDate = dto.OrderDate;
+        order.CreditDueDate = dto.CreditDueDate ?? dto.OrderDate.AddDays(30);
+        order.AmountPaid = dto.AmountPaid;
         order.Status = dto.Status;
         order.CustomerId = dto.CustomerId;
 
@@ -184,6 +194,8 @@ public class OrdersController : ControllerBase
         var orders = dtos.Select(dto => new Order
         {
             OrderDate = dto.OrderDate,
+            CreditDueDate = dto.CreditDueDate ?? dto.OrderDate.AddDays(30),
+            AmountPaid = dto.AmountPaid,
             Status = dto.Status,
             CustomerId = dto.CustomerId,
             OrderItems = dto.Items?.Select(i => new OrderItem
@@ -207,6 +219,8 @@ public class OrdersController : ControllerBase
             {
                 Id = o.Id,
                 OrderDate = o.OrderDate,
+                CreditDueDate = o.CreditDueDate,
+                AmountPaid = o.AmountPaid,
                 Status = o.Status,
                 Customer = new CustomerDto
                 {

@@ -13,9 +13,9 @@ public class NotificationController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery] string? notificationType = null)
     {
-        var notifications = await _service.GetAll();
+        var notifications = await _service.GetAll(notificationType);
         return Ok(ApiResponse<List<Notification>>.Ok(notifications));
     }
 
@@ -32,16 +32,16 @@ public class NotificationController : ControllerBase
     }
 
     [HttpGet("unread")]
-    public async Task<IActionResult> GetUnread()
+    public async Task<IActionResult> GetUnread([FromQuery] string? notificationType = null)
     {
-        var notifications = await _service.GetUnread();
+        var notifications = await _service.GetUnread(notificationType);
         return Ok(ApiResponse<List<Notification>>.Ok(notifications));
     }
 
     [HttpGet("unread-count")]
-    public async Task<IActionResult> GetUnreadCount()
+    public async Task<IActionResult> GetUnreadCount([FromQuery] string? notificationType = null)
     {
-        var count = await _service.GetUnreadCount();
+        var count = await _service.GetUnreadCount(notificationType);
         return Ok(ApiResponse<object>.Ok(new { unreadCount = count }));
     }
 
@@ -53,7 +53,7 @@ public class NotificationController : ControllerBase
             return BadRequest(ApiResponse<Notification>.Fail("Notification message is required."));
         }
 
-        var notification = await _service.Add(dto.Message.Trim());
+        var notification = await _service.Add(dto.Message, dto.NotificationType, dto.ReferenceKey, dto.PayloadJson);
         return StatusCode(StatusCodes.Status201Created, ApiResponse<Notification>.Ok(notification, "Notification created."));
     }
 
