@@ -9,35 +9,53 @@ import {
   AlertTriangle,
   MoreHorizontal
 } from 'lucide-react';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
-import { db, auth, handleFirestoreError, OperationType } from '../lib/firebase';
-import { InventoryItem } from '../types';
+import api from '../services/api/axios';
+
+interface InventoryItem {
+  id: number;
+  name: string;
+  sku: string;
+  stockQty: number;
+  price: number;
+}
 
 const InventoryView = () => {
   const [items, setItems] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [lowStockIds, setLowStockIds] = useState<Set<number>>(new Set());
 
   useEffect(() => {
-    if (!auth.currentUser) return;
+    const load = async () => {
+      setLoading(true);
+      setError(null);
 
-    const q = query(
-      collection(db, 'inventory'),
-      where('userId', '==', auth.currentUser.uid)
-    );
+      try {
+        const [partsRes, lowStockRes] = await Promise.all([
+          api.get('/parts'),
+          api.get('/parts/low-stock')
+        ]);
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const itemsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as InventoryItem[];
-      setItems(itemsData);
-      setLoading(false);
-    }, (error) => {
-      handleFirestoreError(error, OperationType.LIST, 'inventory');
-    });
+        const parts = (partsRes.data?.data ?? []) as InventoryItem[];
+        const lowStockItems = (lowStockRes.data?.data ?? []) as InventoryItem[];
 
-    return unsubscribe;
+        setItems(parts);
+        setLowStockIds(new Set(lowStockItems.map((item) => item.id)));
+      } catch {
+        setError('Failed to load inventory from API.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
   }, []);
+
+  const filteredItems = items.filter((item) => {
+    const q = search.toLowerCase();
+    return item.name.toLowerCase().includes(q) || item.sku.toLowerCase().includes(q);
+  });
 
   return (
     <div className="p-8 space-y-8">
@@ -68,6 +86,8 @@ const InventoryView = () => {
           <input 
             type="text" 
             placeholder="Search parts, SKUs, or manufacturer..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="w-full bg-surface-container-low border border-white/5 rounded-xl py-2.5 pl-11 pr-4 text-sm text-on-surface focus:ring-1 focus:ring-primary/20 placeholder:text-on-surface-variant/30"
           />
         </div>
@@ -103,9 +123,15 @@ const InventoryView = () => {
                     Accessing Vault...
                   </td>
                 </tr>
-              ) : items.length > 0 ? (
-                items.map((item) => {
-                  const isLow = item.quantity <= item.minStock;
+              ) : error ? (
+                <tr>
+                  <td colSpan={5} className="px-6 py-12 text-center text-red-300 font-bold uppercase tracking-widest text-xs">
+                    {error}
+                  </td>
+                </tr>
+              ) : filteredItems.length > 0 ? (
+                filteredItems.map((item) => {
+                  const isLow = lowStockIds.has(item.id);
                   return (
                     <tr key={item.id} className="hover:bg-white-[2%] transition-colors group">
                       <td className="px-6 py-6 font-medium">
@@ -115,7 +141,7 @@ const InventoryView = () => {
                           </div>
                           <div>
                             <p className="text-white font-bold leading-tight">{item.name}</p>
-                            <p className="text-xs text-on-surface-variant font-mono mt-1">{item.partNumber}</p>
+                            <p className="text-xs text-on-surface-variant font-mono mt-1">{item.sku}</p>
                           </div>
                         </div>
                       </td>
@@ -135,8 +161,8 @@ const InventoryView = () => {
                       </td>
                       <td className="px-6 py-6 text-center">
                         <div>
-                          <p className={`text-lg font-black ${isLow ? 'text-red-400' : 'text-white'}`}>{item.quantity}</p>
-                          <p className="text-[10px] font-bold text-on-surface-variant uppercase">Min: {item.minStock}</p>
+                          <p className={`text-lg font-black ${isLow ? 'text-red-400' : 'text-white'}`}>{item.stockQty}</p>
+                          <p className="text-[10px] font-bold text-on-surface-variant uppercase">Threshold: 10</p>
                         </div>
                       </td>
                       <td className="px-6 py-6">

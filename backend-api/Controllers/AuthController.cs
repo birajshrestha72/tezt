@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using VehiclePartsAPI.DTOs;
 
 namespace backend_api.Controllers
 {
@@ -14,24 +15,21 @@ namespace backend_api.Controllers
             if (request.Email == "admin@vehicleparts.com"
                 && request.Password == "Admin@2025")
             {
-                return Ok(new
+                return Ok(ApiResponse<object>.Ok(new
                 {
                     token = "mock-jwt-token",
                     role = "Admin",
                     name = "Admin User"
-                });
+                }, "Login successful."));
             }
 
-            return Unauthorized(new
-            {
-                message = "Invalid credentials"
-            });
+            return Unauthorized(ApiResponse<object>.Fail("Invalid credentials"));
         }
     }
 
     public class LoginRequest
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }

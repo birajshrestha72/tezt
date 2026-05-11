@@ -1,8 +1,10 @@
 export type UserRole = 'Admin' | 'Staff' | 'Customer';
 
 export interface User {
-  role: string;
+  role: UserRole;
   name: string;
+  email?: string;
+  fullName?: string;
 }
 
 export interface LoginDto {
@@ -12,6 +14,6 @@ export interface LoginDto {
 
 export interface AuthResponse {
   token: string;
-  role: string;
+  role: UserRole;
   name: string;
 }

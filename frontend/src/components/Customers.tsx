@@ -10,35 +10,66 @@ import {
   ExternalLink,
   Star
 } from 'lucide-react';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
-import { db, auth, handleFirestoreError, OperationType } from '../lib/firebase';
-import { Customer } from '../types';
+import api from '../services/api/axios';
+
+interface CustomerApiDto {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+}
+
+interface CustomerViewModel {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  vehicles: string[];
+}
 
 const CustomersView = () => {
-  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [customers, setCustomers] = useState<CustomerViewModel[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!auth.currentUser) return;
+    const loadCustomers = async () => {
+      setLoading(true);
+      setError(null);
 
-    const q = query(
-      collection(db, 'customers'),
-      where('userId', '==', auth.currentUser.uid)
-    );
+      try {
+        const response = await api.get('/customers');
+        const data = (response.data?.data ?? []) as CustomerApiDto[];
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const customersData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Customer[];
-      setCustomers(customersData);
-      setLoading(false);
-    }, (error) => {
-      handleFirestoreError(error, OperationType.LIST, 'customers');
-    });
+        const normalized = data.map((c) => ({
+          id: String(c.id),
+          name: `${c.firstName} ${c.lastName}`.trim(),
+          email: c.email,
+          phone: c.phone ?? '-',
+          vehicles: []
+        }));
 
-    return unsubscribe;
+        setCustomers(normalized);
+      } catch {
+        setError('Failed to load customers from API.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadCustomers();
   }, []);
+
+  const filteredCustomers = customers.filter((customer) => {
+    const query = search.toLowerCase();
+    return (
+      customer.name.toLowerCase().includes(query) ||
+      customer.email.toLowerCase().includes(query) ||
+      customer.phone.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <div className="p-8 space-y-8">
@@ -63,6 +94,8 @@ const CustomersView = () => {
         <input 
           type="text" 
           placeholder="Search by name, email, phone or plate number..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="block w-full bg-surface-container border border-white/5 rounded-2xl py-4 pl-12 pr-4 text-on-surface focus:ring-1 focus:ring-primary/20 placeholder:text-on-surface-variant/30 text-lg sm:text-base transition-all"
         />
       </div>
@@ -70,13 +103,18 @@ const CustomersView = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {loading ? (
           [1, 2, 3].map(i => <div key={i} className="h-64 bg-white/5 animate-pulse rounded-3xl" />)
-        ) : customers.length > 0 ? (
-          customers.map((customer) => (
+        ) : error ? (
+          <div className="col-span-full py-20 text-center opacity-70 space-y-4">
+            <Users className="w-16 h-16 mx-auto" />
+            <p className="font-bold uppercase tracking-widest text-xs">{error}</p>
+          </div>
+        ) : filteredCustomers.length > 0 ? (
+          filteredCustomers.map((customer) => (
             <div key={customer.id} className="glass-panel machined-edge rounded-3xl p-6 group hover:border-primary/30 transition-all duration-300 flex flex-col h-full bg-gradient-to-br from-white/[0.02] to-transparent">
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-surface-container-highest border border-white/10 flex items-center justify-center text-xl font-bold text-primary shadow-inner">
-                    {customer.name.split(' ').map(n => n[0]).join('')}
+                    {customer.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </div>
                   <div>
                     <h3 className="font-extrabold text-white text-lg leading-tight uppercase group-hover:text-primary transition-colors">{customer.name}</h3>
@@ -109,12 +147,18 @@ const CustomersView = () => {
                     <span className="text-[10px] font-black text-on-surface-variant uppercase tracking-widest leading-none">Vehicle Pool</span>
                   </div>
                   <div className="space-y-2">
-                    {customer.vehicles.map((car, i) => (
-                      <div key={i} className="flex items-center justify-between p-2.5 bg-surface-container-highest/50 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
-                        <span className="text-xs font-bold text-white/80">{car}</span>
-                        <ChevronRight className="w-3 h-3 text-on-surface-variant" />
+                    {customer.vehicles.length > 0 ? (
+                      customer.vehicles.map((car, i) => (
+                        <div key={i} className="flex items-center justify-between p-2.5 bg-surface-container-highest/50 rounded-xl border border-white/5 hover:border-white/10 transition-colors">
+                          <span className="text-xs font-bold text-white/80">{car}</span>
+                          <ChevronRight className="w-3 h-3 text-on-surface-variant" />
+                        </div>
+                      ))
+                    ) : (
+                      <div className="flex items-center justify-between p-2.5 bg-surface-container-highest/50 rounded-xl border border-white/5">
+                        <span className="text-xs font-bold text-white/50">No vehicles added</span>
                       </div>
-                    ))}
+                    )}
                   </div>
                 </div>
               </div>

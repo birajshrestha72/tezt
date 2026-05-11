@@ -10,45 +10,69 @@ import {
   Wrench,
   LayoutDashboard
 } from 'lucide-react';
-import { collection, query, where, limit, onSnapshot, orderBy } from 'firebase/firestore';
-import { db, handleFirestoreError, OperationType } from '../lib/firebase';
-import { auth } from '../lib/firebase';
-import { RepairOrder } from '../types';
-import { seedInitialData } from '../lib/seed';
+import api from '../services/api/axios';
+
+interface DashboardSummary {
+  totalRevenue: number;
+  totalOrders: number;
+  totalProducts: number;
+  lowStockProducts: number;
+}
+
+interface OrderDto {
+  id: number;
+  orderDate: string;
+  status: string;
+  customerId: number;
+  itemCount: number;
+}
 
 const DashboardView = () => {
-  const [orders, setOrders] = useState<RepairOrder[]>([]);
+  const [orders, setOrders] = useState<OrderDto[]>([]);
+  const [summary, setSummary] = useState<DashboardSummary>({
+    totalRevenue: 0,
+    totalOrders: 0,
+    totalProducts: 0,
+    lowStockProducts: 0
+  });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!auth.currentUser) return;
+    const load = async () => {
+      setLoading(true);
+      setError(null);
 
-    const q = query(
-      collection(db, 'repairOrders'),
-      where('userId', '==', auth.currentUser.uid),
-      orderBy('createdAt', 'desc'),
-      limit(5)
-    );
+      try {
+        const [summaryRes, ordersRes] = await Promise.all([
+          api.get('/dashboard/summary'),
+          api.get('/orders')
+        ]);
 
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const ordersData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as RepairOrder[];
-      setOrders(ordersData);
-      setLoading(false);
-    }, (error) => {
-      handleFirestoreError(error, OperationType.LIST, 'repairOrders');
-    });
+        const summaryPayload = summaryRes.data?.data ?? summaryRes.data;
+        const ordersPayload = Array.isArray(ordersRes.data?.data)
+          ? ordersRes.data.data
+          : Array.isArray(ordersRes.data)
+            ? ordersRes.data
+            : [];
 
-    return unsubscribe;
+        setSummary(summaryPayload ?? summary);
+        setOrders(ordersPayload.slice(0, 5));
+      } catch {
+        setError('Failed to load dashboard data from API.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
   }, []);
 
   const stats = [
-    { label: 'Total Orders', value: orders.length.toString(), growth: 'Active tickets', icon: Timer, color: 'text-amber-400', bg: 'bg-amber-400/10' },
-    { label: 'Completed Today', value: orders.filter(o => o.status === 'completed').length.toString(), growth: '100% efficient', icon: CheckCircle2, color: 'text-sky-400', bg: 'bg-sky-400/10' },
-    { label: 'Parts Pending', value: '12', growth: '3 low stock', icon: AlertCircle, color: 'text-secondary-container', bg: 'bg-secondary-container/10' },
-    { label: 'Revenue Est.', value: `$${orders.reduce((acc, o) => acc + (o.estimatedCost || 0), 0).toLocaleString()}`, growth: '+12.5%', icon: TrendingUp, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
+    { label: 'Total Orders', value: String(summary.totalOrders), growth: 'From PostgreSQL', icon: Timer, color: 'text-amber-400', bg: 'bg-amber-400/10' },
+    { label: 'Products', value: String(summary.totalProducts), growth: 'Current catalog', icon: CheckCircle2, color: 'text-sky-400', bg: 'bg-sky-400/10' },
+    { label: 'Low Stock', value: String(summary.lowStockProducts), growth: 'Below threshold', icon: AlertCircle, color: 'text-secondary-container', bg: 'bg-secondary-container/10' },
+    { label: 'Revenue', value: `$${summary.totalRevenue.toLocaleString()}`, growth: 'Computed from orders', icon: TrendingUp, color: 'text-emerald-400', bg: 'bg-emerald-400/10' },
   ];
   return (
     <div className="p-8 space-y-8">
@@ -102,30 +126,30 @@ const DashboardView = () => {
                 <div key={order.id} className="glass-panel machined-edge rounded-xl p-4 flex items-center justify-between group hover:bg-white/5 transition-colors">
                   <div className="flex items-center gap-4">
                     <div className={`w-1.5 h-10 rounded-full ${
-                      order.priority === 'high' ? 'bg-secondary-container' : 
-                      order.priority === 'medium' ? 'bg-amber-400' : 'bg-sky-400'
+                      order.status.toLowerCase() === 'cancelled' ? 'bg-secondary-container' :
+                      order.status.toLowerCase() === 'pending' ? 'bg-amber-400' : 'bg-sky-400'
                     }`} />
                     <div>
-                      <h4 className="font-bold text-white">{order.vehicle}</h4>
-                      <p className="text-xs text-on-surface-variant font-mono uppercase">{order.id.slice(0, 8)} • {order.customerName}</p>
+                      <h4 className="font-bold text-white">Order #{order.id}</h4>
+                      <p className="text-xs text-on-surface-variant font-mono uppercase">Customer #{order.customerId} • {new Date(order.orderDate).toLocaleDateString()}</p>
                     </div>
                   </div>
                   
                   <div className="hidden md:block">
                     <div className={`text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider ${
-                      order.status === 'in-progress' ? 'bg-primary/10 text-primary' :
-                      order.status === 'pending' ? 'bg-white/5 text-on-surface-variant' :
-                      order.status === 'completed' ? 'bg-emerald-400/10 text-emerald-400' :
+                      order.status.toLowerCase() === 'paid' ? 'bg-emerald-400/10 text-emerald-400' :
+                      order.status.toLowerCase() === 'pending' ? 'bg-white/5 text-on-surface-variant' :
+                      order.status.toLowerCase() === 'shipped' ? 'bg-primary/10 text-primary' :
                       'bg-red-400/10 text-red-400'
                     }`}>
-                      {order.status.replace('-', ' ')}
+                      {order.status}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-4 text-right">
                     <div className="hidden sm:block">
-                      <p className="text-xs text-on-surface-variant font-medium">Estimated</p>
-                      <p className="font-bold text-white">${order.estimatedCost}</p>
+                      <p className="text-xs text-on-surface-variant font-medium">Items</p>
+                      <p className="font-bold text-white">{order.itemCount}</p>
                     </div>
                     <button className="p-2 text-on-surface-variant hover:text-white transition-colors">
                       <MoreVertical className="w-5 h-5" />
@@ -133,24 +157,25 @@ const DashboardView = () => {
                   </div>
                 </div>
               ))
+            ) : error ? (
+              <div className="glass-panel machined-edge rounded-2xl p-12 text-center space-y-6">
+                <div className="mx-auto w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center">
+                  <Wrench className="w-8 h-8 text-on-surface-variant/40" />
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-xl font-bold text-white">Dashboard unavailable</h4>
+                  <p className="text-on-surface-variant text-sm max-w-xs mx-auto">{error}</p>
+                </div>
+              </div>
             ) : (
               <div className="glass-panel machined-edge rounded-2xl p-12 text-center space-y-6">
                 <div className="mx-auto w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center">
                   <Wrench className="w-8 h-8 text-on-surface-variant/40" />
                 </div>
                 <div className="space-y-2">
-                  <h4 className="text-xl font-bold text-white">No active service tickets</h4>
-                  <p className="text-on-surface-variant text-sm max-w-xs mx-auto">Your workshop is currently offline. Initialize demo data to see the workflow in action.</p>
+                  <h4 className="text-xl font-bold text-white">No recent orders</h4>
+                  <p className="text-on-surface-variant text-sm max-w-xs mx-auto">Orders will appear here when transactions are recorded through the backend API.</p>
                 </div>
-                <button 
-                  onClick={async () => {
-                    setLoading(true);
-                    await seedInitialData();
-                  }}
-                  className="px-8 py-3 bg-primary text-on-primary rounded-xl font-bold text-sm shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
-                >
-                  Bootstrap Workshop
-                </button>
               </div>
             )}
           </div>

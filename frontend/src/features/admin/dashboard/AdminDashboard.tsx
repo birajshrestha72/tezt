@@ -42,7 +42,7 @@ export default function AdminDashboard() {
 
   const hours = new Date().getHours();
   const greeting = hours < 12 ? 'Good morning' : hours < 17 ? 'Good afternoon' : 'Good evening';
-  const name = (user?.fullName || user?.email?.split('@')[0]) ?? 'Admin';
+  const name = user?.name ?? 'Admin';
 
   const kpis = [
     { label: 'Total Staff', value: stats.staff, sub: 'Active employees', color: undefined, nav: '/admin/staff' },

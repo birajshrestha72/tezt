@@ -8,7 +8,7 @@ interface NavbarProps {
 
 export default function Navbar({ title = 'Dashboard' }: NavbarProps) {
   const { user, logout } = useAuth();
-  const initials = user?.email?.slice(0, 2).toUpperCase() ?? 'U';
+  const initials = user?.name?.slice(0, 2).toUpperCase() ?? 'U';
 
   return (
     <header className="wm-navbar">
@@ -17,7 +17,7 @@ export default function Navbar({ title = 'Dashboard' }: NavbarProps) {
         <div className="wm-navbar__user">
           <div className="wm-navbar__avatar">{initials}</div>
           <div className="wm-navbar__info">
-            <div className="wm-navbar__name">{user?.fullName || user?.email?.split('@')[0]}</div>
+            <div className="wm-navbar__name">{user?.name || 'User'}</div>
             <div className="wm-navbar__role">{user?.role}</div>
           </div>
         </div>

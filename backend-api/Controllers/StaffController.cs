@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VehiclePartsAPI.DTOs;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -16,38 +17,37 @@ public class StaffController : ControllerBase
     public async Task<IActionResult> GetStaff()
     {
         var staff = await _context.Staff.ToListAsync();
-
-        return Ok(staff);
+        return Ok(ApiResponse<object>.Ok(staff));
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetStaffById(int id)
     {
         var staff = await _context.Staff.FindAsync(id);
-
         if (staff == null)
-            return NotFound();
+        {
+            return NotFound(ApiResponse<object>.Fail("Staff not found."));
+        }
 
-        return Ok(staff);
+        return Ok(ApiResponse<object>.Ok(staff));
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateStaff(Staff model)
     {
         _context.Staff.Add(model);
-
         await _context.SaveChangesAsync();
-
-        return Ok(model);
+        return Ok(ApiResponse<object>.Ok(model, "Staff created successfully."));
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateStaff(int id, Staff model)
     {
         var staff = await _context.Staff.FindAsync(id);
-
         if (staff == null)
-            return NotFound();
+        {
+            return NotFound(ApiResponse<object>.Fail("Staff not found."));
+        }
 
         staff.FirstName = model.FirstName;
         staff.LastName = model.LastName;
@@ -56,22 +56,21 @@ public class StaffController : ControllerBase
         staff.IsActive = model.IsActive;
 
         await _context.SaveChangesAsync();
-
-        return Ok(staff);
+        return Ok(ApiResponse<object>.Ok(staff, "Staff updated successfully."));
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteStaff(int id)
     {
         var staff = await _context.Staff.FindAsync(id);
-
         if (staff == null)
-            return NotFound();
+        {
+            return NotFound(ApiResponse<object>.Fail("Staff not found."));
+        }
 
         _context.Staff.Remove(staff);
-
         await _context.SaveChangesAsync();
 
-        return Ok();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Staff deleted successfully."));
     }
 }

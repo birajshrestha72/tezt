@@ -4,7 +4,7 @@ import { LoginDto, AuthResponse } from '../../shared/types/auth.types';
 export const authService = {
   login: async (data: LoginDto): Promise<AuthResponse> => {
     const response = await api.post('/auth/login', data);
-    return response.data;
+    return response.data.data;
   },
 
   logout: () => {

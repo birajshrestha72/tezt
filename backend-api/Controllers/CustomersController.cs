@@ -22,33 +22,33 @@ public class CustomersController : ControllerBase
                 Phone = c.Phone
             })
             .ToListAsync();
-        return Ok(customers);
+        return Ok(ApiResponse<object>.Ok(customers));
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
         var customer = await _context.Customers.FindAsync(id);
-        if (customer == null) return NotFound();
+        if (customer == null) return NotFound(ApiResponse<object>.Fail("Customer not found."));
 
-        return Ok(new CustomerDto
+        return Ok(ApiResponse<object>.Ok(new CustomerDto
         {
             Id = customer.Id,
             FirstName = customer.FirstName,
             LastName = customer.LastName,
             Email = customer.Email,
             Phone = customer.Phone
-        });
+        }));
     }
 
     [HttpGet("{id:int}/orders")]
     public async Task<IActionResult> GetOrders(int id)
     {
         var exists = await _context.Customers.AnyAsync(c => c.Id == id);
-        if (!exists) return NotFound();
+        if (!exists) return NotFound(ApiResponse<object>.Fail("Customer not found."));
 
         var orders = await _context.Orders.Where(o => o.CustomerId == id).ToListAsync();
-        return Ok(orders);
+        return Ok(ApiResponse<object>.Ok(orders));
     }
 
     [HttpPost]
@@ -65,21 +65,21 @@ public class CustomersController : ControllerBase
         _context.Customers.Add(customer);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetById), new { id = customer.Id }, new CustomerDto
+        return CreatedAtAction(nameof(GetById), new { id = customer.Id }, ApiResponse<object>.Ok(new CustomerDto
         {
             Id = customer.Id,
             FirstName = customer.FirstName,
             LastName = customer.LastName,
             Email = customer.Email,
             Phone = customer.Phone
-        });
+        }, "Customer created successfully."));
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateCustomerDto dto)
     {
         var customer = await _context.Customers.FindAsync(id);
-        if (customer == null) return NotFound();
+        if (customer == null) return NotFound(ApiResponse<object>.Fail("Customer not found."));
 
         customer.FirstName = dto.FirstName;
         customer.LastName = dto.LastName;
@@ -87,18 +87,18 @@ public class CustomersController : ControllerBase
         customer.Phone = dto.Phone;
 
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { updated = id }, "Customer updated successfully."));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var customer = await _context.Customers.FindAsync(id);
-        if (customer == null) return NotFound();
+        if (customer == null) return NotFound(ApiResponse<object>.Fail("Customer not found."));
 
         _context.Customers.Remove(customer);
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Customer deleted successfully."));
     }
 
     [HttpPost("bulk")]
@@ -114,7 +114,7 @@ public class CustomersController : ControllerBase
 
         await _context.Customers.AddRangeAsync(customers);
         await _context.SaveChangesAsync();
-        return Ok(new { inserted = customers.Count });
+        return Ok(ApiResponse<object>.Ok(new { inserted = customers.Count }, "Customers inserted successfully."));
     }
 
     [HttpGet("with-orders")]
@@ -124,12 +124,12 @@ public class CustomersController : ControllerBase
             .Include(c => c.Orders)
             .ToListAsync();
 
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpGet("count")]
     public async Task<IActionResult> Count()
-        => Ok(new { totalCustomers = await _context.Customers.CountAsync() });
+        => Ok(ApiResponse<object>.Ok(new { totalCustomers = await _context.Customers.CountAsync() }));
 
     [HttpGet("full-details")]
     public async Task<IActionResult> FullDetails()
@@ -140,6 +140,6 @@ public class CustomersController : ControllerBase
                     .ThenInclude(oi => oi.Product)
             .ToListAsync();
 
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 }
