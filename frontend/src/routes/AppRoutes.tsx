@@ -20,6 +20,21 @@ import CustomerReportsView from '../components/CustomerReports';
 import NotificationsView from '../components/Notifications';
 import AIAlertsView from '../components/AIAlerts';
 import OrdersView from '../components/Orders';
+import CustomersView from '../components/Customers';
+import PurchaseOrdersView from '../components/PurchaseOrders';
+
+// Staff Pages
+import StaffDashboard from '../features/staff/StaffDashboard';
+import StaffSales from '../features/staff/StaffSales';
+import StaffCustomerSearch from '../features/staff/StaffCustomerSearch';
+import StaffReports from '../features/staff/StaffReports';
+
+// Customer Pages
+import CustomerHome from '../features/customer/CustomerHome';
+import CustomerProfile from '../features/customer/CustomerProfile';
+import CustomerHistory from '../features/customer/CustomerHistory';
+import CustomerAppointments from '../features/customer/CustomerAppointments';
+import CustomerVehicleHealth from '../features/customer/CustomerVehicleHealth';
 
 export default function AppRoutes() {
   return (
@@ -45,8 +60,8 @@ export default function AppRoutes() {
         <Route path="vendors" element={<VendorManagement />} />
         <Route path="parts" element={<InventoryView />} />
         <Route path="sales" element={<OrdersView />} />
-        <Route path="purchase" element={<div>Purchase Orders Placeholder</div>} />
-        <Route path="customers" element={<div>Customer Directory Placeholder</div>} />
+        <Route path="purchase" element={<PurchaseOrdersView />} />
+        <Route path="customers" element={<CustomersView />} />
         <Route path="reports" element={<FinancialsView />} />
         <Route path="reports/customers" element={<CustomerReportsView />} />
         <Route path="notifications" element={<NotificationsView />} />
@@ -64,10 +79,10 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route path="dashboard" element={<div>Staff Dashboard Placeholder</div>} />
-        <Route path="sales" element={<div>New Sale Placeholder</div>} />
-        <Route path="customers" element={<div>Customer Search Placeholder</div>} />
-        <Route path="reports" element={<div>Staff Reports Placeholder</div>} />
+        <Route path="dashboard" element={<StaffDashboard />} />
+        <Route path="sales" element={<StaffSales />} />
+        <Route path="customers" element={<StaffCustomerSearch />} />
+        <Route path="reports" element={<StaffReports />} />
       </Route>
 
       {/* Customer Routes */}
@@ -81,11 +96,11 @@ export default function AppRoutes() {
           </ProtectedRoute>
         }
       >
-        <Route path="home" element={<div>Customer Home Placeholder</div>} />
-        <Route path="profile" element={<div>My Profile Placeholder</div>} />
-        <Route path="history" element={<div>Order History Placeholder</div>} />
-        <Route path="appointments" element={<div>Appointments Placeholder</div>} />
-        <Route path="ai" element={<div>Vehicle Health Placeholder</div>} />
+        <Route path="home" element={<CustomerHome />} />
+        <Route path="profile" element={<CustomerProfile />} />
+        <Route path="history" element={<CustomerHistory />} />
+        <Route path="appointments" element={<CustomerAppointments />} />
+        <Route path="ai" element={<CustomerVehicleHealth />} />
       </Route>
 
       {/* Fallback */}
