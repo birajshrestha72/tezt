@@ -18,6 +18,7 @@ import InventoryView from '../components/Inventory';
 import FinancialsView from '../components/Financials';
 import CustomerReportsView from '../components/CustomerReports';
 import NotificationsView from '../components/Notifications';
+import AIAlertsView from '../components/AIAlerts';
 
 export default function AppRoutes() {
   return (
@@ -48,7 +49,7 @@ export default function AppRoutes() {
         <Route path="reports" element={<FinancialsView />} />
         <Route path="reports/customers" element={<CustomerReportsView />} />
         <Route path="notifications" element={<NotificationsView />} />
-        <Route path="ai" element={<div>AI Predictions Placeholder</div>} />
+        <Route path="ai" element={<AIAlertsView />} />
       </Route>
 
       {/* Staff Routes */}
