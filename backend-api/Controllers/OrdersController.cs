@@ -24,7 +24,7 @@ public class OrdersController : ControllerBase
                 ItemCount = o.OrderItems.Count
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpGet("{id:int}")]
@@ -35,9 +35,9 @@ public class OrdersController : ControllerBase
                 .ThenInclude(oi => oi.Product)
             .FirstOrDefaultAsync(o => o.Id == id);
 
-        if (order == null) return NotFound();
+        if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
-        return Ok(new OrderDetailDto
+        return Ok(ApiResponse<object>.Ok(new OrderDetailDto
         {
             Id = order.Id,
             OrderDate = order.OrderDate,
@@ -52,14 +52,14 @@ public class OrdersController : ControllerBase
                 Quantity = oi.Quantity,
                 UnitPrice = oi.UnitPrice
             }).ToList()
-        });
+        }));
     }
 
     [HttpGet("{id:int}/items")]
     public async Task<IActionResult> GetItems(int id)
     {
         var exists = await _context.Orders.AnyAsync(o => o.Id == id);
-        if (!exists) return NotFound();
+        if (!exists) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
         var items = await _context.OrderItems
             .Where(oi => oi.OrderId == id)
@@ -71,7 +71,7 @@ public class OrdersController : ControllerBase
                 UnitPrice = oi.UnitPrice
             })
             .ToListAsync();
-        return Ok(items);
+        return Ok(ApiResponse<object>.Ok(items));
     }
 
     [HttpGet("{id:int}/customer")]
@@ -81,17 +81,17 @@ public class OrdersController : ControllerBase
             .Include(o => o.Customer)
             .FirstOrDefaultAsync(o => o.Id == id);
 
-        if (order == null) return NotFound();
+        if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
         var c = order.Customer;
-        return Ok(new CustomerDto
+        return Ok(ApiResponse<object>.Ok(new CustomerDto
         {
             Id = c.Id,
             FirstName = c.FirstName,
             LastName = c.LastName,
             Email = c.Email,
             Phone = c.Phone
-        });
+        }));
     }
 
     [HttpPost]
@@ -115,7 +115,7 @@ public class OrdersController : ControllerBase
         _context.Orders.Add(order);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetById), new { id = order.Id }, new OrderDto
+        return StatusCode(StatusCodes.Status201Created, ApiResponse<OrderDto>.Ok(new OrderDto
         {
             Id = order.Id,
             OrderDate = order.OrderDate,
@@ -124,17 +124,17 @@ public class OrdersController : ControllerBase
             Status = order.Status,
             CustomerId = order.CustomerId,
             ItemCount = order.OrderItems?.Count ?? 0
-        });
+        }, "Order created successfully"));
     }
 
     [HttpPost("{id:int}/items")]
     public async Task<IActionResult> AddItem(int id, CreateOrderLineDto item)
     {
         var orderExists = await _context.Orders.AnyAsync(o => o.Id == id);
-        if (!orderExists) return NotFound("Order not found");
+        if (!orderExists) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
         var exists = await _context.OrderItems.AnyAsync(oi => oi.OrderId == id && oi.ProductId == item.ProductId);
-        if (exists) return BadRequest("Item already exists in order");
+        if (exists) return BadRequest(ApiResponse<object>.Fail("Item already exists in order"));
 
         _context.OrderItems.Add(new OrderItem
         {
@@ -145,14 +145,14 @@ public class OrdersController : ControllerBase
         });
 
         await _context.SaveChangesAsync();
-        return Ok();
+        return Ok(ApiResponse<object>.Ok(new { created = true }, "Item added to order"));
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateOrderDto dto)
     {
         var order = await _context.Orders.Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == id);
-        if (order == null) return NotFound();
+        if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
         order.OrderDate = dto.OrderDate;
         order.CreditDueDate = dto.CreditDueDate ?? dto.OrderDate.AddDays(30);
@@ -174,18 +174,18 @@ public class OrdersController : ControllerBase
         }
 
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { updated = true }, "Order updated successfully"));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var order = await _context.Orders.FindAsync(id);
-        if (order == null) return NotFound();
+        if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
         _context.Orders.Remove(order);
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Order deleted successfully"));
     }
 
     [HttpPost("bulk")]
@@ -208,7 +208,7 @@ public class OrdersController : ControllerBase
 
         await _context.Orders.AddRangeAsync(orders);
         await _context.SaveChangesAsync();
-        return Ok(new { inserted = orders.Count });
+        return Ok(ApiResponse<object>.Ok(new { inserted = orders.Count }, "Orders inserted successfully"));
     }
 
     [HttpGet("with-details")]
@@ -239,19 +239,19 @@ public class OrdersController : ControllerBase
                 }).ToList()
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpGet("count")]
     public async Task<IActionResult> Count()
-        => Ok(new { totalOrders = await _context.Orders.CountAsync() });
+        => Ok(ApiResponse<object>.Ok(new { totalOrders = await _context.Orders.CountAsync() }));
 
     [HttpGet("total-amount")]
     public async Task<IActionResult> TotalAmount()
     {
         var total = await _context.OrderItems
             .SumAsync(oi => oi.UnitPrice * oi.Quantity);
-        return Ok(new { totalAmount = total });
+        return Ok(ApiResponse<object>.Ok(new { totalAmount = total }));
     }
 
     [HttpGet("top-customers")]
@@ -267,6 +267,6 @@ public class OrdersController : ControllerBase
             })
             .OrderByDescending(x => x.OrderCount)
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 }

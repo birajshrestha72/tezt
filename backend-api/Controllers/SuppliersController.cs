@@ -15,15 +15,15 @@ public class SuppliersController : ControllerBase
         var suppliers = await _context.Suppliers
             .Select(s => new SupplierDto { Id = s.Id, Name = s.Name, Email = s.Email, Phone = s.Phone })
             .ToListAsync();
-        return Ok(suppliers);
+        return Ok(ApiResponse<object>.Ok(suppliers));
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
         var supplier = await _context.Suppliers.FindAsync(id);
-        if (supplier == null) return NotFound();
-        return Ok(new SupplierDto { Id = supplier.Id, Name = supplier.Name, Email = supplier.Email, Phone = supplier.Phone });
+        if (supplier == null) return NotFound(ApiResponse<object>.Fail("Supplier not found"));
+        return Ok(ApiResponse<object>.Ok(new SupplierDto { Id = supplier.Id, Name = supplier.Name, Email = supplier.Email, Phone = supplier.Phone }));
     }
 
     [HttpPost]
@@ -32,32 +32,32 @@ public class SuppliersController : ControllerBase
         var supplier = new Supplier { Name = dto.Name, Email = dto.Email, Phone = dto.Phone };
         _context.Suppliers.Add(supplier);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = supplier.Id }, new SupplierDto { Id = supplier.Id, Name = supplier.Name, Email = supplier.Email, Phone = supplier.Phone });
+        return StatusCode(StatusCodes.Status201Created, ApiResponse<SupplierDto>.Ok(new SupplierDto { Id = supplier.Id, Name = supplier.Name, Email = supplier.Email, Phone = supplier.Phone }, "Supplier created successfully"));
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateSupplierDto dto)
     {
         var supplier = await _context.Suppliers.FindAsync(id);
-        if (supplier == null) return NotFound();
+        if (supplier == null) return NotFound(ApiResponse<object>.Fail("Supplier not found"));
 
         supplier.Name = dto.Name;
         supplier.Email = dto.Email;
         supplier.Phone = dto.Phone;
 
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { updated = true }, "Supplier updated successfully"));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var supplier = await _context.Suppliers.FindAsync(id);
-        if (supplier == null) return NotFound();
+        if (supplier == null) return NotFound(ApiResponse<object>.Fail("Supplier not found"));
 
         _context.Suppliers.Remove(supplier);
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Supplier deleted successfully"));
     }
 
     [HttpPost("bulk")]
@@ -66,7 +66,7 @@ public class SuppliersController : ControllerBase
         var suppliers = dtos.Select(dto => new Supplier { Name = dto.Name, Email = dto.Email, Phone = dto.Phone }).ToList();
         await _context.Suppliers.AddRangeAsync(suppliers);
         await _context.SaveChangesAsync();
-        return Ok(new { inserted = suppliers.Count });
+        return Ok(ApiResponse<object>.Ok(new { inserted = suppliers.Count }, "Suppliers inserted successfully"));
     }
 
     [HttpGet("products")]
@@ -88,7 +88,7 @@ public class SuppliersController : ControllerBase
                 }).ToList()
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpGet("count")]

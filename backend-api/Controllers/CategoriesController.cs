@@ -15,15 +15,15 @@ public class CategoriesController : ControllerBase
         var categories = await _context.Categories
             .Select(c => new CategoryDto { Id = c.Id, Name = c.Name })
             .ToListAsync();
-        return Ok(categories);
+        return Ok(ApiResponse<object>.Ok(categories));
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
         var category = await _context.Categories.FindAsync(id);
-        if (category == null) return NotFound();
-        return Ok(new CategoryDto { Id = category.Id, Name = category.Name });
+        if (category == null) return NotFound(ApiResponse<object>.Fail("Category not found"));
+        return Ok(ApiResponse<object>.Ok(new CategoryDto { Id = category.Id, Name = category.Name }));
     }
 
     [HttpPost]
@@ -32,28 +32,28 @@ public class CategoriesController : ControllerBase
         var category = new Category { Name = dto.Name };
         _context.Categories.Add(category);
         await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = category.Id }, new CategoryDto { Id = category.Id, Name = category.Name });
+        return StatusCode(StatusCodes.Status201Created, ApiResponse<CategoryDto>.Ok(new CategoryDto { Id = category.Id, Name = category.Name }, "Category created successfully"));
     }
 
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateCategoryDto dto)
     {
         var category = await _context.Categories.FindAsync(id);
-        if (category == null) return NotFound();
+        if (category == null) return NotFound(ApiResponse<object>.Fail("Category not found"));
         category.Name = dto.Name;
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { updated = true }, "Category updated successfully"));
     }
 
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var category = await _context.Categories.FindAsync(id);
-        if (category == null) return NotFound();
+        if (category == null) return NotFound(ApiResponse<object>.Fail("Category not found"));
 
         _context.Categories.Remove(category);
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Category deleted successfully"));
     }
 
     [HttpPost("bulk")]
@@ -62,7 +62,7 @@ public class CategoriesController : ControllerBase
         var categories = dtos.Select(dto => new Category { Name = dto.Name }).ToList();
         await _context.Categories.AddRangeAsync(categories);
         await _context.SaveChangesAsync();
-        return Ok(new { inserted = categories.Count });
+        return Ok(ApiResponse<object>.Ok(new { inserted = categories.Count }, "Categories inserted successfully"));
     }
 
     [HttpGet("products")]
@@ -82,10 +82,10 @@ public class CategoriesController : ControllerBase
                 }).ToList()
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpGet("count")]
     public async Task<IActionResult> Count()
-        => Ok(new { totalCategories = await _context.Categories.CountAsync() });
+        => Ok(ApiResponse<object>.Ok(new { totalCategories = await _context.Categories.CountAsync() }));
 }
