@@ -19,6 +19,7 @@ import FinancialsView from '../components/Financials';
 import CustomerReportsView from '../components/CustomerReports';
 import NotificationsView from '../components/Notifications';
 import AIAlertsView from '../components/AIAlerts';
+import OrdersView from '../components/Orders';
 
 export default function AppRoutes() {
   return (
@@ -43,8 +44,8 @@ export default function AppRoutes() {
         <Route path="staff" element={<StaffManagement />} />
         <Route path="vendors" element={<VendorManagement />} />
         <Route path="parts" element={<InventoryView />} />
+        <Route path="sales" element={<OrdersView />} />
         <Route path="purchase" element={<div>Purchase Orders Placeholder</div>} />
-        <Route path="sales" element={<div>Sales Overview Placeholder</div>} />
         <Route path="customers" element={<div>Customer Directory Placeholder</div>} />
         <Route path="reports" element={<FinancialsView />} />
         <Route path="reports/customers" element={<CustomerReportsView />} />
