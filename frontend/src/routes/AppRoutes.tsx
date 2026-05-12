@@ -14,6 +14,10 @@ import LoginPage from '../features/auth/LoginPage';
 import AdminDashboard from '../features/admin/dashboard/AdminDashboard';
 import StaffManagement from '../features/admin/staff/StaffManagement';
 import VendorManagement from '../features/admin/vendors/VendorManagement';
+import InventoryView from '../components/Inventory';
+import FinancialsView from '../components/Financials';
+import CustomerReportsView from '../components/CustomerReports';
+import NotificationsView from '../components/Notifications';
 
 export default function AppRoutes() {
   return (
@@ -37,12 +41,13 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="staff" element={<StaffManagement />} />
         <Route path="vendors" element={<VendorManagement />} />
-        {/* Placeholder Admin routes */}
-        <Route path="parts" element={<div>Parts Management Placeholder</div>} />
+        <Route path="parts" element={<InventoryView />} />
         <Route path="purchase" element={<div>Purchase Orders Placeholder</div>} />
         <Route path="sales" element={<div>Sales Overview Placeholder</div>} />
         <Route path="customers" element={<div>Customer Directory Placeholder</div>} />
-        <Route path="reports" element={<div>Financial Reports Placeholder</div>} />
+        <Route path="reports" element={<FinancialsView />} />
+        <Route path="reports/customers" element={<CustomerReportsView />} />
+        <Route path="notifications" element={<NotificationsView />} />
         <Route path="ai" element={<div>AI Predictions Placeholder</div>} />
       </Route>
 

@@ -13,6 +13,8 @@ const TITLES: Record<string, string> = {
   '/admin/vendors': 'Vendor Management',
   '/admin/customers': 'Customer Directory',
   '/admin/reports': 'Financial Reports',
+  '/admin/reports/customers': 'Customer Reports',
+  '/admin/notifications': 'Notifications',
   '/admin/ai': 'AI Predictions'
 };
 

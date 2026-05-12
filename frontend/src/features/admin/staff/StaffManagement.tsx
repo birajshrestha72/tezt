@@ -11,6 +11,16 @@ import './StaffManagement.css';
 const PAGE = 10;
 const DEPTS = ['Sales', 'Inventory', 'Customer Service', 'Administration', 'Technical'];
 
+interface StaffApiRecord {
+  id: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  role?: string;
+  isActive?: boolean;
+  createdAt?: string;
+}
+
 interface Staff {
   id: string;
   employeeCode: string;
@@ -21,6 +31,28 @@ interface Staff {
   joinedAt: string;
   phone?: string;
 }
+
+const normalizeStaff = (record: StaffApiRecord): Staff => {
+  const fullName = `${record.firstName ?? ''} ${record.lastName ?? ''}`.trim();
+
+  return {
+    id: String(record.id),
+    employeeCode: `STF-${String(record.id).padStart(3, '0')}`,
+    fullName: fullName || 'Unnamed staff',
+    email: record.email ?? '',
+    department: record.role || 'Unassigned',
+    isActive: record.isActive ?? true,
+    joinedAt: record.createdAt ?? new Date().toISOString(),
+  };
+};
+
+const splitFullName = (fullName: string) => {
+  const parts = fullName.trim().split(/\s+/).filter(Boolean);
+  return {
+    firstName: parts[0] ?? '',
+    lastName: parts.slice(1).join(' '),
+  };
+};
 
 export default function StaffManagement() {
   const [staff, setStaff] = useState<Staff[]>([]);
@@ -38,7 +70,8 @@ export default function StaffManagement() {
     setLoading(true);
     try {
       const r = await api.get('/staff');
-      setStaff(r.data.data);
+      const staffData = Array.isArray(r.data?.data) ? r.data.data : [];
+      setStaff(staffData.map(normalizeStaff));
     } catch {
       toast.error('Failed to load staff.');
     } finally {
@@ -53,9 +86,10 @@ export default function StaffManagement() {
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
     return staff.filter(s => 
-      s.fullName.toLowerCase().includes(q) || 
-      s.employeeCode.toLowerCase().includes(q) || 
-      (s.email || '').toLowerCase().includes(q)
+      (s.fullName ?? '').toLowerCase().includes(q) || 
+      (s.employeeCode ?? '').toLowerCase().includes(q) || 
+      (s.email || '').toLowerCase().includes(q) ||
+      (s.department || '').toLowerCase().includes(q)
     );
   }, [staff, search]);
 
@@ -64,7 +98,15 @@ export default function StaffManagement() {
 
   const onAdd = async (d: any) => {
     try {
-      await api.post('/staff', { ...d, joinedAt: d.joinedAt || new Date().toISOString() });
+      const name = splitFullName(d.fullName || '');
+
+      await api.post('/staff', {
+        firstName: name.firstName,
+        lastName: name.lastName,
+        email: d.email,
+        role: d.department,
+        isActive: true,
+      });
       toast.success(`Staff "${d.fullName}" created.`);
       rstA();
       setShowAdd(false);
@@ -76,12 +118,20 @@ export default function StaffManagement() {
 
   const openEdit = (s: Staff) => {
     setEditing(s);
-    rstE({ fullName: s.fullName, phone: s.phone || '', department: s.department, isActive: s.isActive });
+    rstE({ fullName: s.fullName, phone: s.phone || '', department: s.department, isActive: s.isActive, email: s.email });
   };
 
   const onEdit = async (d: any) => {
     try {
-      await api.put(`/staff/${editing?.id}`, { ...d, isActive: d.isActive === 'true' || d.isActive === true });
+      const name = splitFullName(d.fullName || editing?.fullName || '');
+
+      await api.put(`/staff/${editing?.id}`, {
+        firstName: name.firstName,
+        lastName: name.lastName,
+        email: editing?.email || '',
+        role: d.department || editing?.department || 'Unassigned',
+        isActive: d.isActive === 'true' || d.isActive === true,
+      });
       toast.success('Staff updated.');
       setEditing(null);
       load();

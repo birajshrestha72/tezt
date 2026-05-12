@@ -17,7 +17,8 @@ const NAV: Record<string, NavGroup[]> = {
   Admin: [
     { group: 'Main', items: [{ to: '/admin/dashboard', label: 'Dashboard' }, { to: '/admin/parts', label: 'Parts' }, { to: '/admin/purchase', label: 'Purchase Orders' }, { to: '/admin/sales', label: 'Sales' }] },
     { group: 'Management', items: [{ to: '/admin/staff', label: 'Staff' }, { to: '/admin/vendors', label: 'Vendors' }, { to: '/admin/customers', label: 'Customers' }] },
-    { group: 'Analytics', items: [{ to: '/admin/reports', label: 'Reports' }, { to: '/admin/ai', label: 'AI Predictions' }] },
+    { group: 'Analytics', items: [{ to: '/admin/reports', label: 'Reports' }, { to: '/admin/reports/customers', label: 'Customer Reports' }, { to: '/admin/ai', label: 'AI Predictions' }] },
+    { group: 'Operations', items: [{ to: '/admin/notifications', label: 'Notifications' }] },
   ],
   Staff: [
     { group: 'Main', items: [{ to: '/staff/dashboard', label: 'Dashboard' }, { to: '/staff/sales', label: 'New Sale' }, { to: '/staff/customers', label: 'Customer Search' }] },
