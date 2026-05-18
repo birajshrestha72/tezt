@@ -19,6 +19,7 @@ import StaffManagement from '../features/admin/staff/StaffManagement';
 import VendorManagement from '../features/admin/vendors/VendorManagement';
 import PurchaseOrders from '../features/admin/vendors/PurchaseOrders';
 import PartsManagement from '../pages/PartsManagement';
+import PurchaseInvoice from '../pages/PurchaseInvoice';
 import OrdersManagement from '../features/admin/orders/OrdersManagement';
 import CustomerDirectory from '../features/admin/customers/CustomerDirectory';
 import FinancialReports from '../features/admin/reports/FinancialReports';
@@ -63,8 +64,9 @@ export default function AppRoutes() {
         <Route path="staff"              element={<StaffManagement />} />
         <Route path="vendors"            element={<VendorManagement />} />
         <Route path="parts"              element={<PartsManagement />} />
-        <Route path="sales"              element={<OrdersManagement />} />
         <Route path="purchase"           element={<PurchaseOrders />} />
+        <Route path="purchase/new"       element={<PurchaseInvoice />} />
+        <Route path="sales"              element={<OrdersManagement />} />
         <Route path="customers"          element={<CustomerDirectory />} />
         <Route path="reports"            element={<FinancialReports />} />
         <Route path="reports/customers"  element={<CustomerReports />} />

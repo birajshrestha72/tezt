@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { productService } from '../services/api/productService';
+import { productService, type ProductDetailRecord, type ProductOption } from '../services/api/productService';
 import { purchaseOrderService } from '../services/api/purchaseOrderService';
 
 export default function PurchaseInvoice() {
-  const [suppliers, setSuppliers] = useState<{ id: number; name: string }[]>([]);
-  const [parts, setParts] = useState<any[]>([]);
+  const [suppliers, setSuppliers] = useState<ProductOption[]>([]);
+  const [parts, setParts] = useState<ProductDetailRecord[]>([]);
   const [supplierId, setSupplierId] = useState<number | ''>('');
   const [items, setItems] = useState<{ partId: string; quantity: number; unitPrice: number }[]>([]);
   const [saving, setSaving] = useState(false);
