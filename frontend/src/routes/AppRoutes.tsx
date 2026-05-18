@@ -17,7 +17,7 @@ import RegisterPage from '../features/auth/RegisterPage';
 import AdminDashboard from '../features/admin/dashboard/AdminDashboard';
 import StaffManagement from '../features/admin/staff/StaffManagement';
 import VendorManagement from '../features/admin/vendors/VendorManagement';
-import PurchaseOrders from '../features/admin/vendors/PurchaseOrders';
+import PurchaseOrders from '../pages/PurchaseOrders';
 import PartsManagement from '../pages/PartsManagement';
 import PurchaseInvoice from '../pages/PurchaseInvoice';
 import OrdersManagement from '../features/admin/orders/OrdersManagement';

@@ -40,6 +40,7 @@ export const productService = {
   getProducts: () => unwrap<ProductDetailRecord[]>(api.get<ProductDetailRecord[]>('/parts?activeOnly=true')),
   getCategories: () => unwrap<ProductOption[]>(api.get<ProductOption[]>('/part-categories')),
   getSuppliers: () => unwrap<ProductOption[]>(api.get<ProductOption[]>('/suppliers')),
+  getLowStock: () => unwrap<ProductDetailRecord[]>(api.get<ProductDetailRecord[]>('/parts/low-stock')),
   createProduct: (payload: Partial<ProductFormData>) => unwrap(api.post('/parts', payload)),
   updateProduct: (id: string, payload: Partial<ProductFormData>) => unwrap(api.put(`/parts/${id}`, payload)),
   deleteProduct: (id: string) => unwrap(api.delete(`/parts/${id}`)),
