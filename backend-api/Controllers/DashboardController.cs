@@ -1,26 +1,29 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VehiclePartsAPI.Data;
 
-[ApiController]
-[Route("api/[controller]")]
-public class DashboardController : ControllerBase
+namespace VehiclePartsAPI.Controllers
 {
-    private readonly AppDbContext _context;
-    public DashboardController(AppDbContext context) => _context = context;
-
-    [HttpGet("summary")]
-    public async Task<IActionResult> Summary()
+    [ApiController]
+    [Route("api/[controller]")]
+    public class DashboardController : ControllerBase
     {
-        var result = new
-        {
-            totalCategories = await _context.Categories.CountAsync(),
-            totalSuppliers = await _context.Suppliers.CountAsync(),
-            totalProducts = await _context.Products.CountAsync(),
-            totalCustomers = await _context.Customers.CountAsync(),
-            totalOrders = await _context.Orders.CountAsync(),
-            totalOrderItems = await _context.OrderItems.CountAsync()
-        };
+        private readonly AppDbContext _context;
 
-        return Ok(result);
+        public DashboardController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpGet("counts")]
+        public async Task<IActionResult> GetCounts()
+        {
+            var staffCount = await _context.Staffs.CountAsync();
+            var vendorCount = await _context.Vendors.CountAsync();
+            var partsCount = await _context.Parts.CountAsync();
+            var revenue = 125400.50; // Static for Milestone-1 as per requirement
+
+            return Ok(new { staffCount, vendorCount, partsCount, revenue });
+        }
     }
 }

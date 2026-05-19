@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace WeatherAPI.DTOs;
+namespace VehiclePartsAPI.DTOs;
 
 public class CreateOrderDto
 {

@@ -9,6 +9,8 @@ public class Part
     public int? SupplierId { get; set; }
     public Guid? CategoryId { get; set; }
     [Required][MaxLength(150)] public string Name { get; set; } = string.Empty;
+    public string? Sku { get; set; }
+    public string? Description { get; set; }
     [Column(TypeName="numeric(10,2)")] public decimal UnitPrice    { get; set; }
     [Column(TypeName="numeric(10,2)")] public decimal CostPrice    { get; set; }
     public int  StockQty     { get; set; } = 0;
@@ -22,4 +24,6 @@ public class Part
 
     [NotMapped] public bool IsLowStock   => IsActive && StockQty <= ReorderLevel;
     [NotMapped] public bool IsOutOfStock => StockQty == 0;
+    [NotMapped] public string[]? CompatibleMakes { get; set; }
 }
+
