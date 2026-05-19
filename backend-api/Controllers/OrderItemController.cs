@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VehiclePartsAPI.DTOs;
@@ -9,6 +10,7 @@ public class OrderItemsController : ControllerBase
     private readonly AppDbContext _context;
     public OrderItemsController(AppDbContext context) => _context = context;
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -21,14 +23,15 @@ public class OrderItemsController : ControllerBase
                 UnitPrice = oi.UnitPrice
             })
             .ToListAsync();
-        return Ok(items);
+        return Ok(ApiResponse<object>.Ok(items));
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateOrderItemDto dto)
     {
         var exists = await _context.OrderItems.AnyAsync(x => x.OrderId == dto.OrderId && x.ProductId == dto.ProductId);
-        if (exists) return BadRequest("Order item already exists");
+        if (exists) return BadRequest(ApiResponse<object>.Fail("Order item already exists"));
 
         _context.OrderItems.Add(new OrderItem
         {
@@ -39,20 +42,22 @@ public class OrderItemsController : ControllerBase
         });
 
         await _context.SaveChangesAsync();
-        return Ok();
+        return Ok(ApiResponse<object>.Ok(new { created = true }, "Order item created successfully"));
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpDelete]
     public async Task<IActionResult> Delete([FromQuery] int orderId, [FromQuery] int productId)
     {
         var item = await _context.OrderItems.FindAsync(orderId, productId);
-        if (item == null) return NotFound();
+        if (item == null) return NotFound(ApiResponse<object>.Fail("Order item not found"));
 
         _context.OrderItems.Remove(item);
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { deleted = true }, "Order item deleted successfully"));
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpPost("bulk")]
     public async Task<IActionResult> BulkInsert(List<CreateOrderItemDto> dtos)
     {
@@ -66,9 +71,10 @@ public class OrderItemsController : ControllerBase
 
         await _context.OrderItems.AddRangeAsync(entities);
         await _context.SaveChangesAsync();
-        return Ok(new { inserted = entities.Count });
+        return Ok(ApiResponse<object>.Ok(new { inserted = entities.Count }, "Order items inserted successfully"));
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("full-details")]
     public async Task<IActionResult> FullDetails()
     {
@@ -83,13 +89,15 @@ public class OrderItemsController : ControllerBase
                 UnitPrice = oi.UnitPrice
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("count")]
     public async Task<IActionResult> Count()
-        => Ok(new { totalOrderItems = await _context.OrderItems.CountAsync() });
+        => Ok(ApiResponse<object>.Ok(new { totalOrderItems = await _context.OrderItems.CountAsync() }));
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("by-date")]
     public async Task<IActionResult> ByDate([FromQuery] DateTime date)
     {
@@ -108,6 +116,6 @@ public class OrderItemsController : ControllerBase
                 UnitPrice = oi.UnitPrice
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 }

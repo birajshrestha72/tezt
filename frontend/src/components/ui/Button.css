@@ -1,0 +1,39 @@
+.wm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.wm-btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.wm-btn--fw { width: 100%; }
+.wm-btn--sm { padding: 6px 12px; font-size: 12px; }
+.wm-btn--md { padding: 9px 18px; }
+.wm-btn--lg { padding: 12px 24px; font-size: 15px; }
+
+.wm-btn--primary { background: var(--primary); color: #fff; }
+.wm-btn--primary:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.wm-btn--secondary { background: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-light); }
+.wm-btn--secondary:hover:not(:disabled) { background: var(--bg-secondary); border-color: var(--border-medium); transform: translateY(-1px); }
+
+.wm-btn--danger { background: transparent; color: var(--danger); border: 1px solid var(--border-light); }
+.wm-btn--danger:hover:not(:disabled) { border-color: var(--danger); background: var(--danger-bg); }
+
+.wm-btn--ghost { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
+.wm-btn--ghost:hover:not(:disabled) { background: var(--primary-light); }
+
+.wm-btn--success { background: var(--success); color: #fff; }
+.wm-btn--success:hover:not(:disabled) { opacity: .9; transform: translateY(-1px); box-shadow: var(--shadow-md); }

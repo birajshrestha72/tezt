@@ -1,102 +1,106 @@
 using Microsoft.EntityFrameworkCore;
-using VehiclePartsAPI.models;
-using VehiclePartsAPI.Models;
 
-namespace VehiclePartsAPI.Data
+public class AppDbContext : DbContext
 {
-    public class AppDbContext : DbContext
+    //Add constructor to accept DbContextOptions 
+    //This allows configuration to be passed in from Program.cs when registering the DbContext 
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+    }
 
-        // Milestone 1 Models
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
-        public DbSet<Vendor> Vendors { get; set; }
-        public DbSet<Part> Parts { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Order> Orders { get; set; }
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<Notification> Notifications { get; set; }
+    public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+    public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<PartRequest> PartRequests { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 
-        // Existing Models (For compatibility)
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<Staff> Staff { get; set; }
 
-        // ── BIRAJ (M2) DbSets ────────────────────────────────────────────────────
-        public DbSet<PartCategory> PartCategories => Set<PartCategory>();
-        public DbSet<StockMovement> StockMovements => Set<StockMovement>();
-        public DbSet<PurchaseOrder> PurchaseOrders => Set<PurchaseOrder>();
-        public DbSet<PurchaseOrderItem> PurchaseOrderItems => Set<PurchaseOrderItem>();
-        // ── RABIN (M3) adds: SaleInvoices, SaleInvoiceItems, CreditPayments
-        // ── AYUSH (M4) adds: Customers, VehicleModels, Vehicles, Appointments, PartRequests, Reviews
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // Composite Key: OrderItem
+        modelBuilder.Entity<OrderItem>()
+            .HasKey(oi => new { oi.OrderId, oi.ProductId });
 
-            // Configure OrderItem composite key
-            modelBuilder.Entity<OrderItem>()
-                .HasKey(oi => new { oi.OrderId, oi.ProductId });
+        // Configure relationships
 
-            // Seed Data GUIDs
-            var adminRoleId = Guid.Parse("00000000-0000-0000-0000-000000000001");
-            var staffRoleId = Guid.Parse("00000000-0000-0000-0000-000000000002");
-            var customerRoleId = Guid.Parse("00000000-0000-0000-0000-000000000003");
-            var adminUserId = Guid.Parse("f0000000-0000-0000-0000-000000000000");
+        // Category - Product (1-M)
+        modelBuilder.Entity<Category>()
+            .HasMany(c => c.Products)
+            .WithOne(p => p.Category)
+            .HasForeignKey(p => p.CategoryId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            // Seed Roles
-            modelBuilder.Entity<Role>().HasData(
-                new Role { Id = adminRoleId, Name = "Admin" },
-                new Role { Id = staffRoleId, Name = "Staff" },
-                new Role { Id = customerRoleId, Name = "Customer" }
-            );
+        // Supplier - Product (1-M)
+        modelBuilder.Entity<Supplier>()
+            .HasMany(s => s.Products)
+            .WithOne(p => p.Supplier)
+            .HasForeignKey(p => p.SupplierId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-            // Seed Admin User
-            modelBuilder.Entity<User>().HasData(
-                new User 
-                { 
-                    Id = adminUserId, 
-                    Email = "admin@vp.com", 
-                    PasswordHash = "Admin@123", 
-                    FullName = "System Admin", 
-                    RoleId = adminRoleId 
-                }
-            );
+        // Customer - Order (1-M)
+        modelBuilder.Entity<Customer>()
+            .HasMany(c => c.Orders)
+            .WithOne(o => o.Customer)
+            .HasForeignKey(o => o.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            // Customer - Order (1-M)
-            modelBuilder.Entity<Customer>()
-                .HasMany(c => c.Orders)
-                .WithOne(o => o.Customer)
-                .HasForeignKey(o => o.CustomerId)
-                .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Customer>()
+            .HasMany(c => c.Appointments)
+            .WithOne(a => a.Customer)
+            .HasForeignKey(a => a.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            // Order - OrderItem (1-M)
-            modelBuilder.Entity<Order>()
-                .HasMany(o => o.OrderItems)
-                .WithOne(oi => oi.Order)
-                .HasForeignKey(oi => oi.OrderId)
-                .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Customer>()
+            .HasMany(c => c.PartRequests)
+            .WithOne(request => request.Customer)
+            .HasForeignKey(request => request.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            // Product - OrderItem (1-M)
-            modelBuilder.Entity<Product>()
-                .HasMany(p => p.OrderItems)
-                .WithOne(oi => oi.Product)
-                .HasForeignKey(oi => oi.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Customer>()
+            .HasMany(c => c.Reviews)
+            .WithOne(review => review.Customer)
+            .HasForeignKey(review => review.CustomerId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-            // ── BIRAJ (M2) EF configs ────────────────────────────────────────────
-            modelBuilder.Entity<Part>()
-                .HasOne(p => p.Supplier).WithMany()
-                .HasForeignKey(p => p.SupplierId).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<Part>()
-                .HasOne(p => p.Category).WithMany(c => c.Parts)
-                .HasForeignKey(p => p.CategoryId).OnDelete(DeleteBehavior.SetNull);
-            modelBuilder.Entity<PurchaseOrderItem>()
-                .HasIndex(i => new { i.PurchaseOrderId, i.PartId }).IsUnique();
-            // ── RABIN (M3) adds EF configs below ─────────────────────────────
-        }
+        // Order - OrderItem (1-M)
+        modelBuilder.Entity<Order>()
+            .HasMany(o => o.OrderItems)
+            .WithOne(oi => oi.Order)
+            .HasForeignKey(oi => oi.OrderId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Product - OrderItem (1-M)
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.OrderItems)
+            .WithOne(oi => oi.Product)
+            .HasForeignKey(oi => oi.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Supplier>()
+            .HasMany(s => s.PurchaseOrders)
+            .WithOne(order => order.Supplier)
+            .HasForeignKey(order => order.SupplierId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<PurchaseOrder>()
+            .HasMany(order => order.Items)
+            .WithOne(item => item.PurchaseOrder)
+            .HasForeignKey(item => item.PurchaseOrderId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<PurchaseOrderItem>()
+            .HasOne(item => item.Product)
+            .WithMany(product => product.PurchaseOrderItems)
+            .HasForeignKey(item => item.ProductId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
-

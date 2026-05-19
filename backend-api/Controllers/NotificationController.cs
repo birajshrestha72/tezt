@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VehiclePartsAPI.DTOs;
 
 [ApiController]
+[Authorize(Roles = "Admin")]
 [Route("api/notifications")]
 public class NotificationController : ControllerBase
 {
@@ -12,15 +15,77 @@ public class NotificationController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAll([FromQuery] string? notificationType = null)
     {
-        return Ok(await _service.GetAll());
+        var notifications = await _service.GetAll(notificationType);
+        return Ok(ApiResponse<List<Notification>>.Ok(notifications));
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var notification = await _service.GetById(id);
+        if (notification == null)
+        {
+            return NotFound(ApiResponse<Notification>.Fail($"Notification with id {id} was not found."));
+        }
+
+        return Ok(ApiResponse<Notification>.Ok(notification));
+    }
+
+    [HttpGet("unread")]
+    public async Task<IActionResult> GetUnread([FromQuery] string? notificationType = null)
+    {
+        var notifications = await _service.GetUnread(notificationType);
+        return Ok(ApiResponse<List<Notification>>.Ok(notifications));
+    }
+
+    [HttpGet("unread-count")]
+    public async Task<IActionResult> GetUnreadCount([FromQuery] string? notificationType = null)
+    {
+        var count = await _service.GetUnreadCount(notificationType);
+        return Ok(ApiResponse<object>.Ok(new { unreadCount = count }));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] string message)
+    public async Task<IActionResult> Add([FromBody] CreateNotificationDto dto)
     {
-        var result = await _service.Add(message);
-        return Ok(result);
+        if (string.IsNullOrWhiteSpace(dto.Message))
+        {
+            return BadRequest(ApiResponse<Notification>.Fail("Notification message is required."));
+        }
+
+        var notification = await _service.Add(dto.Message, dto.NotificationType, dto.ReferenceKey, dto.PayloadJson);
+        return StatusCode(StatusCodes.Status201Created, ApiResponse<Notification>.Ok(notification, "Notification created."));
+    }
+
+    [HttpPatch("{id:int}/read")]
+    public async Task<IActionResult> MarkAsRead(int id)
+    {
+        var notification = await _service.MarkAsRead(id);
+        if (notification == null)
+        {
+            return NotFound(ApiResponse<Notification>.Fail($"Notification with id {id} was not found."));
+        }
+
+        return Ok(ApiResponse<Notification>.Ok(notification, "Notification marked as read."));
+    }
+
+    [HttpPatch("read-all")]
+    public async Task<IActionResult> MarkAllAsRead()
+    {
+        var updatedCount = await _service.MarkAllAsRead();
+        return Ok(ApiResponse<object>.Ok(new { updated = updatedCount }, "All notifications marked as read."));
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var notification = await _service.GetById(id);
+        if (notification == null)
+            return NotFound(ApiResponse<object>.Fail("Notification not found."));
+
+        await _service.Delete(id);
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Notification deleted."));
     }
 }

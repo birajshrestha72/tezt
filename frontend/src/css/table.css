@@ -1,0 +1,49 @@
+.table-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table thead tr { background: var(--bg-card-highest); border-bottom: 1px solid var(--border); }
+.data-table th {
+  padding: var(--md) var(--lg); text-align: left;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
+}
+.data-table th.right { text-align: right; }
+.data-table td {
+  padding: var(--md) var(--lg); border-bottom: 1px solid var(--border);
+  font-size: var(--body-md); color: var(--text-primary); vertical-align: middle;
+}
+.data-table td.right { text-align: right; }
+.data-table td.muted { color: var(--text-secondary); }
+.data-table tbody tr:last-child td { border-bottom: none; }
+.data-table tbody tr { transition: background var(--transition); }
+.data-table tbody tr:hover td { background: var(--bg-card-low); }
+.table-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--md) var(--lg); background: var(--bg-card-highest);
+  border-top: 1px solid var(--border); flex-wrap: wrap; gap: var(--sm);
+}
+.table-count { font-size: 13px; color: var(--text-secondary); }
+.pagination { display: flex; gap: 4px; }
+.pag-btn {
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--r-sm); font-size: 13px; font-weight: 600;
+  cursor: pointer; border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--text-secondary); transition: all var(--transition);
+}
+.pag-btn:hover { background: var(--bg-card-high); color: var(--text-primary); }
+.pag-btn.active { background: var(--red); color: var(--text-on-red); border-color: var(--red); }
+.pag-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.action-btns { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
+.tbl-btn {
+  width: 32px; height: 32px; border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all var(--transition);
+  color: var(--text-secondary); background: transparent; border: none; font-size: 18px;
+}
+.tbl-btn:hover { background: var(--bg-card-highest); color: var(--text-primary); }
+.tbl-btn.del:hover { background: var(--danger-bg); color: var(--danger); }
+
+/* EMPLOYEE ROW */
+.emp-row { display: flex; align-items: center; gap: var(--md); }
+.emp-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.emp-sub  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }

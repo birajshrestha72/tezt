@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VehiclePartsAPI.DTOs;
@@ -7,252 +8,530 @@ using VehiclePartsAPI.DTOs;
 public class OrdersController : ControllerBase
 {
     private readonly AppDbContext _context;
-    public OrdersController(AppDbContext context) => _context = context;
+    private readonly NotificationService _notificationService;
+    private readonly EmailService _emailService;
 
+    public OrdersController(AppDbContext context, NotificationService notificationService, EmailService emailService)
+    {
+        _context = context;
+        _notificationService = notificationService;
+        _emailService = emailService;
+    }
+
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var data = await _context.Orders
-            .Select(o => new OrderDto
-            {
-                Id = o.Id,
-                OrderDate = o.OrderDate,
-                Status = o.Status,
-                CustomerId = o.CustomerId,
-                ItemCount = o.OrderItems.Count
-            })
-            .ToListAsync();
-        return Ok(data);
+        try
+        {
+            var data = await _context.Orders
+                .AsNoTracking()
+                .Select(order => new OrderDto
+                {
+                    Id = order.Id,
+                    OrderDate = order.OrderDate,
+                    CreditDueDate = order.CreditDueDate,
+                    AmountPaid = order.AmountPaid,
+                    DiscountAmount = order.DiscountAmount,
+                    LoyaltyDiscountApplied = order.LoyaltyDiscountApplied,
+                    TotalAmount = order.OrderItems.Sum(orderItem => orderItem.Quantity * orderItem.UnitPrice) - order.DiscountAmount,
+                    Status = order.Status,
+                    CustomerId = order.CustomerId,
+                    ItemCount = order.OrderItems.Count
+                })
+                .ToListAsync();
+
+            return Ok(ApiResponse<object>.Ok(data));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load orders: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Admin,Staff,Customer")]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var order = await _context.Orders
-            .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-            .FirstOrDefaultAsync(o => o.Id == id);
-
-        if (order == null) return NotFound();
-
-        return Ok(new OrderDetailDto
+        try
         {
-            Id = order.Id,
-            OrderDate = order.OrderDate,
-            Status = order.Status,
-            CustomerId = order.CustomerId,
-            OrderItems = order.OrderItems.Select(oi => new OrderItemSummaryDto
-            {
-                ProductId = oi.ProductId,
-                ProductName = oi.Product.Name,
-                Quantity = oi.Quantity,
-                UnitPrice = oi.UnitPrice
-            }).ToList()
-        });
+            var order = await _context.Orders
+                .AsNoTracking()
+                .Include(item => item.Customer)
+                .Include(item => item.OrderItems)
+                    .ThenInclude(orderItem => orderItem.Product)
+                .FirstOrDefaultAsync(item => item.Id == id);
+
+            if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
+
+            return Ok(ApiResponse<object>.Ok(MapOrderDetail(order)));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load order: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Admin,Staff,Customer")]
     [HttpGet("{id:int}/items")]
     public async Task<IActionResult> GetItems(int id)
     {
-        var exists = await _context.Orders.AnyAsync(o => o.Id == id);
-        if (!exists) return NotFound();
+        try
+        {
+            var exists = await _context.Orders.AnyAsync(order => order.Id == id);
+            if (!exists) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
-        var items = await _context.OrderItems
-            .Where(oi => oi.OrderId == id)
-            .Select(oi => new OrderItemSummaryDto
-            {
-                ProductId = oi.ProductId,
-                ProductName = oi.Product.Name,
-                Quantity = oi.Quantity,
-                UnitPrice = oi.UnitPrice
-            })
-            .ToListAsync();
-        return Ok(items);
+            var items = await _context.OrderItems
+                .AsNoTracking()
+                .Where(orderItem => orderItem.OrderId == id)
+                .Select(orderItem => new OrderItemSummaryDto
+                {
+                    ProductId = orderItem.ProductId,
+                    ProductName = orderItem.Product.Name,
+                    Quantity = orderItem.Quantity,
+                    UnitPrice = orderItem.UnitPrice
+                })
+                .ToListAsync();
+
+            return Ok(ApiResponse<object>.Ok(items));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load order items: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Admin,Staff,Customer")]
     [HttpGet("{id:int}/customer")]
     public async Task<IActionResult> GetCustomer(int id)
     {
-        var order = await _context.Orders
-            .Include(o => o.Customer)
-            .FirstOrDefaultAsync(o => o.Id == id);
-
-        if (order == null) return NotFound();
-
-        var c = order.Customer;
-        return Ok(new CustomerDto
+        try
         {
-            Id = c.Id,
-            FirstName = c.FirstName,
-            LastName = c.LastName,
-            Email = c.Email,
-            Phone = c.Phone
-        });
+            var order = await _context.Orders
+                .AsNoTracking()
+                .Include(item => item.Customer)
+                .FirstOrDefaultAsync(item => item.Id == id);
+
+            if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
+
+            return Ok(ApiResponse<object>.Ok(MapCustomer(order.Customer)));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load order customer: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Staff")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateOrderDto dto)
     {
-        var order = new Order
+        try
         {
-            OrderDate = dto.OrderDate,
-            Status = dto.Status,
-            CustomerId = dto.CustomerId,
-            OrderItems = dto.Items?.Select(i => new OrderItem
+            if (!ModelState.IsValid)
             {
-                ProductId = i.ProductId,
-                Quantity = i.Quantity,
-                UnitPrice = i.UnitPrice
-            }).ToList()
-        };
+                return BadRequest(ApiResponse<object>.Fail("Invalid order data."));
+            }
 
-        _context.Orders.Add(order);
-        await _context.SaveChangesAsync();
+            var orderDate = dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate;
+            var order = new Order
+            {
+                OrderDate = orderDate,
+                CreditDueDate = dto.CreditDueDate ?? orderDate.AddDays(30),
+                AmountPaid = dto.AmountPaid,
+                Status = string.IsNullOrWhiteSpace(dto.Status) ? "Pending" : dto.Status,
+                CustomerId = dto.CustomerId,
+                OrderItems = dto.Items?.Select(item => new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice
+                }).ToList() ?? new List<OrderItem>()
+            };
 
-        return CreatedAtAction(nameof(GetById), new { id = order.Id }, new OrderDto
+            _context.Orders.Add(order);
+            await _context.SaveChangesAsync();
+
+            var persistedOrder = await _context.Orders
+                .Include(item => item.Customer)
+                .Include(item => item.OrderItems)
+                    .ThenInclude(orderItem => orderItem.Product)
+                .FirstAsync(item => item.Id == order.Id);
+
+            var subtotal = GetOrderSubtotal(persistedOrder);
+            var discount = subtotal > 5000m ? subtotal * 0.10m : 0m;
+            persistedOrder.DiscountAmount = discount;
+            persistedOrder.LoyaltyDiscountApplied = discount > 0m;
+
+            foreach (var orderItem in persistedOrder.OrderItems)
+            {
+                var product = orderItem.Product;
+                product.StockQty = Math.Max(0, product.StockQty - orderItem.Quantity);
+                await NotifyLowStockIfNeeded(product, $"order:{persistedOrder.Id}");
+            }
+
+            await _context.SaveChangesAsync();
+
+            return StatusCode(StatusCodes.Status201Created, ApiResponse<object>.Ok(new
+            {
+                order = MapOrderDto(persistedOrder),
+                subtotal,
+                discountAmount = discount,
+                totalAmount = subtotal - discount,
+                loyaltyDiscountApplied = persistedOrder.LoyaltyDiscountApplied
+            }, "Order created successfully"));
+        }
+        catch (Exception ex)
         {
-            Id = order.Id,
-            OrderDate = order.OrderDate,
-            Status = order.Status,
-            CustomerId = order.CustomerId,
-            ItemCount = order.OrderItems?.Count ?? 0
-        });
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to create order: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Staff")]
     [HttpPost("{id:int}/items")]
     public async Task<IActionResult> AddItem(int id, CreateOrderLineDto item)
     {
-        var orderExists = await _context.Orders.AnyAsync(o => o.Id == id);
-        if (!orderExists) return NotFound("Order not found");
-
-        var exists = await _context.OrderItems.AnyAsync(oi => oi.OrderId == id && oi.ProductId == item.ProductId);
-        if (exists) return BadRequest("Item already exists in order");
-
-        _context.OrderItems.Add(new OrderItem
+        try
         {
-            OrderId = id,
-            ProductId = item.ProductId,
-            Quantity = item.Quantity,
-            UnitPrice = item.UnitPrice
-        });
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ApiResponse<object>.Fail("Invalid order item data."));
+            }
 
-        await _context.SaveChangesAsync();
-        return Ok();
+            var orderExists = await _context.Orders.AnyAsync(order => order.Id == id);
+            if (!orderExists) return NotFound(ApiResponse<object>.Fail("Order not found"));
+
+            var exists = await _context.OrderItems.AnyAsync(orderItem => orderItem.OrderId == id && orderItem.ProductId == item.ProductId);
+            if (exists) return BadRequest(ApiResponse<object>.Fail("Item already exists in order"));
+
+            _context.OrderItems.Add(new OrderItem
+            {
+                OrderId = id,
+                ProductId = item.ProductId,
+                Quantity = item.Quantity,
+                UnitPrice = item.UnitPrice
+            });
+
+            var product = await _context.Products.FirstOrDefaultAsync(productItem => productItem.Id == item.ProductId);
+            if (product != null)
+            {
+                product.StockQty = Math.Max(0, product.StockQty - item.Quantity);
+                await NotifyLowStockIfNeeded(product, $"order:{id}");
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(ApiResponse<object>.Ok(new { created = true }, "Item added to order"));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to add order item: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Staff")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateOrderDto dto)
     {
-        var order = await _context.Orders.Include(o => o.OrderItems).FirstOrDefaultAsync(o => o.Id == id);
-        if (order == null) return NotFound();
-
-        order.OrderDate = dto.OrderDate;
-        order.Status = dto.Status;
-        order.CustomerId = dto.CustomerId;
-
-        _context.OrderItems.RemoveRange(order.OrderItems);
-
-        if (dto.Items != null && dto.Items.Any())
+        try
         {
-            order.OrderItems = dto.Items.Select(i => new OrderItem
+            if (!ModelState.IsValid)
             {
-                OrderId = id,
-                ProductId = i.ProductId,
-                Quantity = i.Quantity,
-                UnitPrice = i.UnitPrice
-            }).ToList();
-        }
+                return BadRequest(ApiResponse<object>.Fail("Invalid order data."));
+            }
 
-        await _context.SaveChangesAsync();
-        return NoContent();
+            var order = await _context.Orders.Include(item => item.OrderItems).FirstOrDefaultAsync(item => item.Id == id);
+            if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
+
+            order.OrderDate = dto.OrderDate;
+            order.CreditDueDate = dto.CreditDueDate ?? dto.OrderDate.AddDays(30);
+            order.AmountPaid = dto.AmountPaid;
+            order.Status = dto.Status;
+            order.CustomerId = dto.CustomerId;
+
+            _context.OrderItems.RemoveRange(order.OrderItems);
+
+            if (dto.Items != null && dto.Items.Any())
+            {
+                order.OrderItems = dto.Items.Select(item => new OrderItem
+                {
+                    OrderId = id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice
+                }).ToList();
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok(ApiResponse<object>.Ok(new { updated = true }, "Order updated successfully"));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to update order: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Staff")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var order = await _context.Orders.FindAsync(id);
-        if (order == null) return NotFound();
+        try
+        {
+            var order = await _context.Orders.FindAsync(id);
+            if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
-        _context.Orders.Remove(order);
-        await _context.SaveChangesAsync();
-        return NoContent();
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+            return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Order deleted successfully"));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to delete order: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Staff")]
     [HttpPost("bulk")]
     public async Task<IActionResult> BulkInsert(List<CreateOrderDto> dtos)
     {
-        var orders = dtos.Select(dto => new Order
+        try
         {
-            OrderDate = dto.OrderDate,
-            Status = dto.Status,
-            CustomerId = dto.CustomerId,
-            OrderItems = dto.Items?.Select(i => new OrderItem
+            var orders = dtos.Select(dto => new Order
             {
-                ProductId = i.ProductId,
-                Quantity = i.Quantity,
-                UnitPrice = i.UnitPrice
-            }).ToList()
-        }).ToList();
+                OrderDate = dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate,
+                CreditDueDate = dto.CreditDueDate ?? ((dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate).AddDays(30)),
+                AmountPaid = dto.AmountPaid,
+                Status = string.IsNullOrWhiteSpace(dto.Status) ? "Pending" : dto.Status,
+                CustomerId = dto.CustomerId,
+                OrderItems = dto.Items?.Select(item => new OrderItem
+                {
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    UnitPrice = item.UnitPrice
+                }).ToList() ?? new List<OrderItem>()
+            }).ToList();
 
-        await _context.Orders.AddRangeAsync(orders);
-        await _context.SaveChangesAsync();
-        return Ok(new { inserted = orders.Count });
+            await _context.Orders.AddRangeAsync(orders);
+            await _context.SaveChangesAsync();
+            return Ok(ApiResponse<object>.Ok(new { inserted = orders.Count }, "Orders inserted successfully"));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to insert orders: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("with-details")]
     public async Task<IActionResult> WithDetails()
     {
-        var data = await _context.Orders
-            .Select(o => new OrderWithDetailsDto
-            {
-                Id = o.Id,
-                OrderDate = o.OrderDate,
-                Status = o.Status,
-                Customer = new CustomerDto
+        try
+        {
+            var data = await _context.Orders
+                .AsNoTracking()
+                .Include(order => order.Customer)
+                .Include(order => order.OrderItems)
+                    .ThenInclude(orderItem => orderItem.Product)
+                .Select(order => new OrderWithDetailsDto
                 {
-                    Id = o.Customer.Id,
-                    FirstName = o.Customer.FirstName,
-                    LastName = o.Customer.LastName,
-                    Email = o.Customer.Email,
-                    Phone = o.Customer.Phone
-                },
-                OrderItems = o.OrderItems.Select(oi => new OrderItemSummaryDto
-                {
-                    ProductId = oi.ProductId,
-                    ProductName = oi.Product.Name,
-                    Quantity = oi.Quantity,
-                    UnitPrice = oi.UnitPrice
-                }).ToList()
-            })
-            .ToListAsync();
-        return Ok(data);
+                    Id = order.Id,
+                    OrderDate = order.OrderDate,
+                    CreditDueDate = order.CreditDueDate,
+                    AmountPaid = order.AmountPaid,
+                    DiscountAmount = order.DiscountAmount,
+                    LoyaltyDiscountApplied = order.LoyaltyDiscountApplied,
+                    TotalAmount = order.OrderItems.Sum(orderItem => orderItem.Quantity * orderItem.UnitPrice) - order.DiscountAmount,
+                    Status = order.Status,
+                    CustomerId = order.CustomerId,
+                    Customer = MapCustomer(order.Customer),
+                    OrderItems = order.OrderItems.Select(orderItem => new OrderItemSummaryDto
+                    {
+                        ProductId = orderItem.ProductId,
+                        ProductName = orderItem.Product.Name,
+                        Quantity = orderItem.Quantity,
+                        UnitPrice = orderItem.UnitPrice
+                    }).ToList()
+                })
+                .ToListAsync();
+
+            return Ok(ApiResponse<object>.Ok(data));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load detailed orders: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("count")]
     public async Task<IActionResult> Count()
-        => Ok(new { totalOrders = await _context.Orders.CountAsync() });
+    {
+        try
+        {
+            return Ok(ApiResponse<object>.Ok(new { totalOrders = await _context.Orders.CountAsync() }));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to count orders: {ex.Message}"));
+        }
+    }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("total-amount")]
     public async Task<IActionResult> TotalAmount()
     {
-        var total = await _context.OrderItems
-            .SumAsync(oi => oi.UnitPrice * oi.Quantity);
-        return Ok(new { totalAmount = total });
+        try
+        {
+            var total = await _context.OrderItems.SumAsync(orderItem => orderItem.UnitPrice * orderItem.Quantity);
+            return Ok(ApiResponse<object>.Ok(new { totalAmount = total }));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to calculate total amount: {ex.Message}"));
+        }
     }
 
+    [Authorize(Roles = "Admin,Staff")]
     [HttpGet("top-customers")]
     public async Task<IActionResult> TopCustomers()
     {
-        var data = await _context.Orders
-            .GroupBy(o => new { o.CustomerId, o.Customer.FirstName, o.Customer.LastName })
-            .Select(g => new
+        try
+        {
+            var data = await _context.Orders
+                .AsNoTracking()
+                .GroupBy(order => new { order.CustomerId, order.Customer.FirstName, order.Customer.LastName })
+                .Select(group => new
+                {
+                    group.Key.CustomerId,
+                    CustomerName = group.Key.FirstName + " " + group.Key.LastName,
+                    OrderCount = group.Count()
+                })
+                .OrderByDescending(item => item.OrderCount)
+                .ToListAsync();
+
+            return Ok(ApiResponse<object>.Ok(data));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load top customers: {ex.Message}"));
+        }
+    }
+
+    [Authorize(Roles = "Staff")]
+    [HttpPost("{id:int}/send-invoice")]
+    public async Task<IActionResult> SendInvoice(int id)
+    {
+        try
+        {
+            var order = await _context.Orders
+                .AsNoTracking()
+                .Include(item => item.Customer)
+                .Include(item => item.OrderItems)
+                    .ThenInclude(orderItem => orderItem.Product)
+                .FirstOrDefaultAsync(item => item.Id == id);
+
+            if (order == null)
             {
-                g.Key.CustomerId,
-                CustomerName = g.Key.FirstName + " " + g.Key.LastName,
-                OrderCount = g.Count()
-            })
-            .OrderByDescending(x => x.OrderCount)
-            .ToListAsync();
-        return Ok(data);
+                return NotFound(ApiResponse<object>.Fail("Order not found"));
+            }
+
+            var subtotal = GetOrderSubtotal(order);
+            var items = order.OrderItems.Select(orderItem => new InvoiceLineItemDto
+            {
+                ProductName = orderItem.Product.Name,
+                Quantity = orderItem.Quantity,
+                UnitPrice = orderItem.UnitPrice,
+                LineTotal = orderItem.Quantity * orderItem.UnitPrice
+            }).ToList();
+
+            await _emailService.SendInvoiceEmail(
+                order.Customer.Email,
+                $"{order.Customer.FirstName} {order.Customer.LastName}".Trim(),
+                order.Id,
+                subtotal - order.DiscountAmount,
+                order.DiscountAmount,
+                items);
+
+            return Ok(ApiResponse<object>.Ok(new { sent = true, orderId = order.Id }, "Invoice email sent successfully."));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to send invoice: {ex.Message}"));
+        }
+    }
+
+    private async Task NotifyLowStockIfNeeded(Product product, string referenceKey)
+    {
+        if (product.StockQty >= 10)
+        {
+            return;
+        }
+
+        await _notificationService.Add(
+            $"Low stock alert: {product.Name} is down to {product.StockQty} unit(s).",
+            "LowStock",
+            $"low-stock:product:{product.Id}:{referenceKey}");
+    }
+
+    private static decimal GetOrderSubtotal(Order order)
+    {
+        return order.OrderItems.Sum(orderItem => orderItem.Quantity * orderItem.UnitPrice);
+    }
+
+    private static OrderDto MapOrderDto(Order order)
+    {
+        var subtotal = GetOrderSubtotal(order);
+        return new OrderDto
+        {
+            Id = order.Id,
+            OrderDate = order.OrderDate,
+            CreditDueDate = order.CreditDueDate,
+            AmountPaid = order.AmountPaid,
+            DiscountAmount = order.DiscountAmount,
+            LoyaltyDiscountApplied = order.LoyaltyDiscountApplied,
+            TotalAmount = subtotal - order.DiscountAmount,
+            Status = order.Status,
+            CustomerId = order.CustomerId,
+            ItemCount = order.OrderItems.Count
+        };
+    }
+
+    private static OrderDetailDto MapOrderDetail(Order order)
+    {
+        var subtotal = GetOrderSubtotal(order);
+        return new OrderDetailDto
+        {
+            Id = order.Id,
+            OrderDate = order.OrderDate,
+            CreditDueDate = order.CreditDueDate,
+            AmountPaid = order.AmountPaid,
+            DiscountAmount = order.DiscountAmount,
+            LoyaltyDiscountApplied = order.LoyaltyDiscountApplied,
+            TotalAmount = subtotal - order.DiscountAmount,
+            Status = order.Status,
+            CustomerId = order.CustomerId,
+            OrderItems = order.OrderItems.Select(orderItem => new OrderItemSummaryDto
+            {
+                ProductId = orderItem.ProductId,
+                ProductName = orderItem.Product.Name,
+                Quantity = orderItem.Quantity,
+                UnitPrice = orderItem.UnitPrice
+            }).ToList()
+        };
+    }
+
+    private static CustomerDto MapCustomer(Customer customer)
+    {
+        return new CustomerDto
+        {
+            Id = customer.Id,
+            FirstName = customer.FirstName,
+            LastName = customer.LastName,
+            Email = customer.Email,
+            Phone = customer.Phone,
+            VehicleNumber = customer.VehicleNumber,
+            VehicleMake = customer.VehicleMake,
+            VehicleModel = customer.VehicleModel,
+            VehicleYear = customer.VehicleYear
+        };
     }
 }

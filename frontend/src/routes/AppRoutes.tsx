@@ -17,9 +17,8 @@ import RegisterPage from '../features/auth/RegisterPage';
 import AdminDashboard from '../features/admin/dashboard/AdminDashboard';
 import StaffManagement from '../features/admin/staff/StaffManagement';
 import VendorManagement from '../features/admin/vendors/VendorManagement';
-import PurchaseOrders from '../pages/PurchaseOrders';
-import PartsManagement from '../pages/PartsManagement';
-import PurchaseInvoice from '../pages/PurchaseInvoice';
+import PurchaseOrders from '../features/admin/vendors/PurchaseOrders';
+import InventoryManagement from '../features/admin/inventory/InventoryManagement';
 import OrdersManagement from '../features/admin/orders/OrdersManagement';
 import CustomerDirectory from '../features/admin/customers/CustomerDirectory';
 import FinancialReports from '../features/admin/reports/FinancialReports';
@@ -63,10 +62,9 @@ export default function AppRoutes() {
         <Route path="dashboard"          element={<AdminDashboard />} />
         <Route path="staff"              element={<StaffManagement />} />
         <Route path="vendors"            element={<VendorManagement />} />
-        <Route path="parts"              element={<PartsManagement />} />
-        <Route path="purchase"           element={<PurchaseOrders />} />
-        <Route path="purchase/new"       element={<PurchaseInvoice />} />
+        <Route path="parts"              element={<InventoryManagement />} />
         <Route path="sales"              element={<OrdersManagement />} />
+        <Route path="purchase"           element={<PurchaseOrders />} />
         <Route path="customers"          element={<CustomerDirectory />} />
         <Route path="reports"            element={<FinancialReports />} />
         <Route path="reports/customers"  element={<CustomerReports />} />

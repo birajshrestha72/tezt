@@ -1,0 +1,10 @@
+.wm-layout { display: flex; min-height: 100vh; background: var(--page-bg); }
+.wm-layout__body { flex: 1; display: flex; flex-direction: column; min-width: 0; background: var(--page-bg); }
+.wm-layout__content { flex: 1; padding: var(--content-gap); background: var(--page-bg); color: var(--text-primary); }
+
+@media (max-width: 768px) {
+  .wm-layout__content {
+    padding: 16px;
+    padding-top: calc(var(--navbar-height) + 8px);
+  }
+}

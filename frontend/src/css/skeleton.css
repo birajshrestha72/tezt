@@ -1,0 +1,16 @@
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  border-radius: var(--r);
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-high) 50%, var(--bg-card) 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
+.sk-text   { height: 14px; border-radius: 4px; margin-bottom: 8px; }
+.sk-title  { height: 24px; border-radius: 4px; margin-bottom: 12px; }
+.sk-stat   { height: 90px; border-radius: var(--r-lg); }
+.sk-row    { height: 52px; border-radius: 0; border-bottom: 1px solid var(--border); }
+.sk-card   { height: 120px; border-radius: var(--r-lg); }
+.sk-avatar { border-radius: var(--r-full); width: 40px; height: 40px; }

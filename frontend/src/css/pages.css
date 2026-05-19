@@ -1,0 +1,98 @@
+/* ADMIN DASHBOARD */
+.insight-card {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-lg); border: 1px solid var(--border);
+  background: var(--bg-card); min-height: 280px;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: var(--xl);
+}
+.insight-card__glow {
+  position: absolute; top: -40px; right: -40px; width: 200px; height: 200px;
+  background: var(--red); opacity: 0.15; filter: blur(80px); border-radius: 50%;
+  pointer-events: none;
+}
+.insight-card__label { display: flex; align-items: center; gap: var(--sm); color: var(--red-bright); font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: var(--md); }
+.insight-card__title { font-size: var(--head-sm); font-weight: 700; color: var(--text-primary); margin-bottom: var(--md); }
+.insight-card__body  { font-size: var(--body-lg); color: var(--text-secondary); margin-bottom: var(--xl); max-width: 600px; }
+
+/* DIAGNOSTIC CARDS */
+.diag-card {
+  border-radius: var(--r-lg); padding: var(--lg);
+  background: var(--bg-card); border-left: 4px solid var(--border); margin-bottom: var(--md);
+}
+.diag-card.good     { border-left-color: var(--success); background: var(--success-bg); }
+.diag-card.warning  { border-left-color: var(--warning); background: var(--warning-bg); }
+.diag-card.critical { border-left-color: var(--danger);  background: var(--danger-bg);  }
+.diag-card__header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--sm); }
+.diag-card__component { font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.diag-card__msg   { font-size: var(--body-md); color: var(--text-secondary); margin-bottom: var(--sm); }
+.diag-card__action { font-size: 13px; color: var(--text-muted); font-style: italic; }
+.diag-card__cost  { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+
+/* NOTIFICATION ITEMS */
+.notif-item {
+  display: flex; align-items: flex-start; gap: var(--md);
+  padding: var(--md) var(--lg); border-bottom: 1px solid var(--border);
+  transition: background var(--transition); cursor: pointer;
+}
+.notif-item:last-child { border-bottom: none; }
+.notif-item:hover { background: var(--bg-card-low); }
+.notif-item.unread { border-left: 3px solid var(--red); background: rgba(214,40,40,0.04); }
+.notif-icon {
+  width: 36px; height: 36px; border-radius: var(--r-full);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.notif-icon.low-stock { background: var(--warning-bg); color: var(--warning); }
+.notif-icon.credit    { background: var(--danger-bg);  color: var(--danger); }
+.notif-icon.general   { background: var(--info-bg);    color: var(--info); }
+.notif-msg   { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+.notif-time  { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+.notif-meta  { flex: 1; }
+
+/* PURCHASE ORDER LINE ITEMS */
+.po-item-row { display: grid; grid-template-columns: 1fr auto auto auto; gap: var(--md); align-items: center; margin-bottom: var(--sm); }
+.po-total    { display: flex; justify-content: flex-end; font-size: var(--head-sm); font-weight: 700; margin-top: var(--md); padding-top: var(--md); border-top: 1px solid var(--border); }
+
+/* ORDER LINE ITEMS IN SALES */
+.order-item-row { display: grid; grid-template-columns: 1fr 80px 120px 100px 32px; gap: var(--md); align-items: center; margin-bottom: var(--sm); }
+
+/* VEHICLE HEALTH HEADER */
+.vehicle-header { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--lg); margin-bottom: var(--xl); display: flex; align-items: center; gap: var(--md); }
+.vehicle-header__icon { width: 48px; height: 48px; background: var(--red-dim); border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--red-bright); }
+
+/* CUSTOMER PROFILE CARDS */
+.profile-shell { display: grid; grid-template-columns: 280px 1fr; gap: var(--lg); }
+.profile-card  { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--xl); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.profile-name  { font-size: var(--head-sm); font-weight: 700; color: var(--text-primary); margin-top: var(--md); }
+.profile-info-row { display: flex; align-items: center; gap: var(--sm); padding: var(--sm) 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); }
+.profile-info-row:last-child { border-bottom: none; }
+.profile-info-row svg { color: var(--text-muted); font-size: 16px; }
+@media (max-width: 768px) { .profile-shell { grid-template-columns: 1fr; } }
+
+/* TABS */
+.tab-row { display: flex; border-bottom: 1px solid var(--border); margin-bottom: var(--xl); gap: 2px; }
+.tab-btn {
+  padding: var(--sm) var(--lg); font-size: 14px; font-weight: 600;
+  color: var(--text-secondary); border: none; background: none; cursor: pointer;
+  border-bottom: 3px solid transparent; margin-bottom: -1px; transition: all var(--transition);
+}
+.tab-btn:hover { color: var(--text-primary); }
+.tab-btn.active { color: var(--red-bright); border-bottom-color: var(--red); }
+
+/* CREDIT REMINDER TABLE */
+.credit-tag { display: inline-block; font-size: 12px; font-weight: 700; color: var(--danger); background: var(--danger-bg); padding: 2px 8px; border-radius: var(--r-sm); }
+
+/* STATUS INDICATOR for appointments */
+.appt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--lg); margin-bottom: var(--md); display: flex; align-items: flex-start; justify-content: space-between; gap: var(--md); }
+.appt-date  { font-size: var(--head-md); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+.appt-month { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.appt-service { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.appt-notes   { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+/* REVIEW CARDS */
+.review-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--lg); margin-bottom: var(--md); }
+.review-stars { color: var(--amber); font-size: 16px; margin-bottom: var(--sm); }
+.review-comment { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+.review-meta { display: flex; align-items: center; justify-content: space-between; margin-top: var(--md); }
+.review-author { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.review-date   { font-size: 11px; color: var(--text-muted); }

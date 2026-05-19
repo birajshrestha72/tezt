@@ -17,5 +17,6 @@ public class Product
    public Supplier Supplier { get; set; }
 
    // One Product can appear in many OrderItems (1-to-M)
-   public ICollection<OrderItem> OrderItems { get; set; }
+   public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+   public ICollection<PurchaseOrderItem> PurchaseOrderItems { get; set; } = new List<PurchaseOrderItem>();
 }

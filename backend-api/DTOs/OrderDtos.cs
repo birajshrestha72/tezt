@@ -5,6 +5,8 @@ namespace VehiclePartsAPI.DTOs;
 public class CreateOrderDto
 {
     public DateTime OrderDate { get; set; } = DateTime.UtcNow;
+    public DateTime? CreditDueDate { get; set; }
+    public decimal AmountPaid { get; set; } = 0m;
     public string Status { get; set; } = "Pending";
 
     [Required]
@@ -31,6 +33,8 @@ public class CreateOrderLineDto
 public class UpdateOrderDto
 {
     public DateTime OrderDate { get; set; }
+    public DateTime? CreditDueDate { get; set; }
+    public decimal AmountPaid { get; set; }
     public string Status { get; set; } = "Pending";
 
     [Required]
@@ -43,6 +47,11 @@ public class OrderDto
 {
     public int Id { get; set; }
     public DateTime OrderDate { get; set; }
+    public DateTime? CreditDueDate { get; set; }
+    public decimal AmountPaid { get; set; }
+    public decimal DiscountAmount { get; set; }
+    public bool LoyaltyDiscountApplied { get; set; }
+    public decimal TotalAmount { get; set; }
     public string Status { get; set; } = string.Empty;
     public int CustomerId { get; set; }
     public int ItemCount { get; set; }
@@ -52,6 +61,11 @@ public class OrderDetailDto
 {
     public int Id { get; set; }
     public DateTime OrderDate { get; set; }
+    public DateTime? CreditDueDate { get; set; }
+    public decimal AmountPaid { get; set; }
+    public decimal DiscountAmount { get; set; }
+    public bool LoyaltyDiscountApplied { get; set; }
+    public decimal TotalAmount { get; set; }
     public string Status { get; set; } = string.Empty;
     public int CustomerId { get; set; }
     public List<OrderItemSummaryDto> OrderItems { get; set; } = new();
@@ -69,7 +83,21 @@ public class OrderWithDetailsDto
 {
     public int Id { get; set; }
     public DateTime OrderDate { get; set; }
+    public DateTime? CreditDueDate { get; set; }
+    public decimal AmountPaid { get; set; }
+    public decimal DiscountAmount { get; set; }
+    public bool LoyaltyDiscountApplied { get; set; }
+    public decimal TotalAmount { get; set; }
     public string Status { get; set; } = string.Empty;
+    public int CustomerId { get; set; }
     public CustomerDto? Customer { get; set; }
     public List<OrderItemSummaryDto> OrderItems { get; set; } = new();
+}
+
+public class InvoiceLineItemDto
+{
+    public string ProductName { get; set; } = string.Empty;
+    public int Quantity { get; set; }
+    public decimal UnitPrice { get; set; }
+    public decimal LineTotal { get; set; }
 }

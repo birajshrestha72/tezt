@@ -1,0 +1,101 @@
+.wm-sidebar {
+  background: var(--sidebar-bg);
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform .25s ease;
+}
+
+.wm-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+}
+
+.wm-sidebar__logo {
+  width: 32px;
+  height: 32px;
+  background: var(--primary);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.wm-sidebar__name { color: #fff; font-size: 14px; font-weight: 700; line-height: 1.15; }
+.wm-sidebar__sub { color: rgba(255, 255, 255, .3); font-size: 9px; letter-spacing: .1em; }
+
+.wm-sidebar__close {
+  display: none;
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, .5);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.wm-sidebar__nav { flex: 1; padding: 8px 0; overflow-y: auto; }
+
+.wm-sidebar__grp {
+  padding: 12px 16px 3px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: rgba(255, 255, 255, .25);
+  text-transform: uppercase;
+}
+
+.wm-sidebar__item {
+  display: flex;
+  align-items: center;
+  padding: 9px 16px;
+  color: rgba(255, 255, 255, .5);
+  text-decoration: none;
+  font-size: 13px;
+  border-left: 2px solid transparent;
+  transition: background .1s, color .1s;
+}
+
+.wm-sidebar__item:hover { background: rgba(255, 255, 255, .04); color: rgba(255, 255, 255, .8); }
+.wm-sidebar__item--active { background: rgba(192, 57, 43, .18); color: #fff; border-left-color: var(--primary); }
+
+.wm-sidebar__foot { padding: 14px 16px; border-top: 1px solid rgba(255, 255, 255, .06); font-size: 10px; color: rgba(255, 255, 255, .2); }
+
+.wm-hamburger {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .wm-hamburger { display: flex; }
+  .wm-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 300;
+    transform: translateX(-100%);
+  }
+  .wm-sidebar--open { transform: translateX(0); }
+  .wm-sidebar__close { display: flex; }
+  .wm-sb-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, .4); z-index: 250; }
+}

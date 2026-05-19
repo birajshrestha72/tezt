@@ -1,47 +1,88 @@
 import api from './axios';
 
-export type ProductOption = { id: string; name: string };
-
-export type ProductCategory = { id: string; name: string };
-
-export type ProductSupplier = { id: string; name: string };
-
-export type ProductDetailRecord = {
-  id: string;
-  sku: string;
-  name: string;
-  price: number;
-  costPrice?: number;
-  stockQty: number;
-  reorderLevel?: number;
-  isActive?: boolean;
-  categoryId?: string;
-  supplierId?: string;
-  category?: { id: string; name: string } | null;
-  supplier?: { id: string; name: string } | null;
-  updatedAt?: string;
-};
-
-export type ProductFormData = {
+export interface ProductApiRecord {
+  id: number;
   name: string;
   sku: string;
   price: number;
   stockQty: number;
-  categoryId?: string;
-  supplierId?: string;
+  categoryId: number;
+  supplierId: number;
+}
+
+export interface ProductDetailRecord extends ProductApiRecord {
+  category?: {
+    id: number;
+    name: string;
+  };
+  supplier?: {
+    id: number;
+    name: string;
+    email?: string;
+    phone?: string | null;
+  };
+}
+
+export interface ProductOption {
+  id: number;
+  name: string;
+}
+
+export interface ProductFormData {
+  name: string;
+  sku: string;
+  price: number;
+  stockQty: number;
+  categoryId: number;
+  supplierId: number;
+}
+
+type ApiResponse<T> = {
+  success: boolean;
+  message?: string | null;
+  data: T;
 };
 
-const unwrap = async <T>(promise: Promise<{ data: T }>) => {
-  const response = await promise;
-  return response.data;
-};
+const unwrap = <T,>(response: { data: ApiResponse<T> }) => response.data.data;
 
 export const productService = {
-  getProducts: () => unwrap<ProductDetailRecord[]>(api.get<ProductDetailRecord[]>('/parts?activeOnly=true')),
-  getCategories: () => unwrap<ProductOption[]>(api.get<ProductOption[]>('/part-categories')),
-  getSuppliers: () => unwrap<ProductOption[]>(api.get<ProductOption[]>('/suppliers')),
-  getLowStock: () => unwrap<ProductDetailRecord[]>(api.get<ProductDetailRecord[]>('/parts/low-stock')),
-  createProduct: (payload: Partial<ProductFormData>) => unwrap(api.post('/parts', payload)),
-  updateProduct: (id: string, payload: Partial<ProductFormData>) => unwrap(api.put(`/parts/${id}`, payload)),
-  deleteProduct: (id: string) => unwrap(api.delete(`/parts/${id}`)),
+  async getProductDtos() {
+    const response = await api.get<ApiResponse<ProductApiRecord[]>>('/products');
+    return unwrap(response);
+  },
+
+  async getProducts() {
+    const response = await api.get<ApiResponse<ProductDetailRecord[]>>('/products/with-details');
+    return unwrap(response);
+  },
+
+  async getLowStock(threshold = 10) {
+    const response = await api.get<ApiResponse<ProductApiRecord[]>>('/parts/low-stock', { params: { threshold } });
+    return unwrap(response);
+  },
+
+  async getCategories() {
+    const response = await api.get<ApiResponse<ProductOption[]>>('/categories');
+    return unwrap(response);
+  },
+
+  async getSuppliers() {
+    const response = await api.get<ApiResponse<ProductOption[]>>('/suppliers');
+    return unwrap(response);
+  },
+
+  async createProduct(payload: ProductFormData) {
+    const response = await api.post<ApiResponse<ProductApiRecord>>('/products', payload);
+    return unwrap(response);
+  },
+
+  async updateProduct(id: number, payload: ProductFormData) {
+    const response = await api.put<ApiResponse<ProductApiRecord>>(`/products/${id}`, payload);
+    return unwrap(response);
+  },
+
+  async deleteProduct(id: number) {
+    const response = await api.delete<ApiResponse<{ deleted: number }>>(`/products/${id}`);
+    return unwrap(response);
+  },
 };

@@ -1,41 +1,78 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using VehiclePartsAPI.Models;
-using VehiclePartsAPI.Services;
+using Microsoft.EntityFrameworkCore;
+using VehiclePartsAPI.DTOs;
 
-namespace VehiclePartsAPI.Controllers
+[ApiController]
+[Route("api/vendors")]
+[Authorize(Roles = "Admin")]
+public class VendorsController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    // [Authorize(Roles = "Admin,Staff")]
-    public class VendorController : ControllerBase
+    private readonly AppDbContext _context;
+
+    public VendorsController(AppDbContext context)
     {
-        private readonly IVendorService _vendorService;
+        _context = context;
+    }
 
-        public VendorController(IVendorService vendorService)
+    [HttpGet]
+    public async Task<IActionResult> GetVendors([FromQuery] bool activeOnly = false)
+    {
+        var vendors = await _context.Suppliers.ToListAsync();
+        return Ok(ApiResponse<object>.Ok(vendors));
+    }
+
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetVendorById(int id)
+    {
+        var vendor = await _context.Suppliers.FindAsync(id);
+        if (vendor == null)
         {
-            _vendorService = vendorService;
+            return NotFound(ApiResponse<object>.Fail("Vendor not found."));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll() => Ok(await _vendorService.GetAllVendors());
+        return Ok(ApiResponse<object>.Ok(vendor));
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Vendor vendor) => Ok(await _vendorService.CreateVendor(vendor));
+    [HttpPost]
+    public async Task<IActionResult> CreateVendor(Supplier model)
+    {
+        _context.Suppliers.Add(model);
+        await _context.SaveChangesAsync();
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] Vendor vendor)
+        return Ok(ApiResponse<object>.Ok(model, "Vendor created successfully."));
+    }
+
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> UpdateVendor(int id, Supplier model)
+    {
+        var vendor = await _context.Suppliers.FindAsync(id);
+        if (vendor == null)
         {
-            if (id != vendor.Id) return BadRequest();
-            return Ok(await _vendorService.UpdateVendor(vendor));
+            return NotFound(ApiResponse<object>.Fail("Vendor not found."));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        vendor.Name = model.Name;
+        vendor.Email = model.Email;
+        vendor.Phone = model.Phone;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(ApiResponse<object>.Ok(vendor, "Vendor updated successfully."));
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteVendor(int id)
+    {
+        var vendor = await _context.Suppliers.FindAsync(id);
+        if (vendor == null)
         {
-            var success = await _vendorService.DeleteVendor(id);
-            if (!success) return NotFound();
-            return NoContent();
+            return NotFound(ApiResponse<object>.Fail("Vendor not found."));
         }
+
+        _context.Suppliers.Remove(vendor);
+        await _context.SaveChangesAsync();
+
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Vendor deleted successfully."));
     }
 }

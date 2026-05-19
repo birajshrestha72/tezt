@@ -1,189 +1,104 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VehiclePartsAPI.models;
-using WeatherAPI.DTOs;
+using VehiclePartsAPI.DTOs;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
 public class PartsController : ControllerBase
 {
-    private readonly AppDbContext _ctx;
-    public PartsController(AppDbContext ctx) => _ctx = ctx;
+    private readonly AppDbContext _context;
+
+    public PartsController(AppDbContext context)
+    {
+        _context = context;
+    }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(
-        [FromQuery] string? search,
-        [FromQuery] Guid? categoryId,
-        [FromQuery] bool? lowStock,
-        [FromQuery] bool activeOnly = true)
+    public async Task<IActionResult> GetParts([FromQuery] bool activeOnly = false)
     {
-        var q = _ctx.Set<Part>().Include(p => p.Supplier).Include(p => p.Category).AsQueryable();
-        if (activeOnly) q = q.Where(p => p.IsActive);
-        if (!string.IsNullOrWhiteSpace(search)) q = q.Where(p => p.Name.ToLower().Contains(search.ToLower()));
-        if (categoryId.HasValue) q = q.Where(p => p.CategoryId == categoryId);
-        if (lowStock == true) q = q.Where(p => p.StockQty <= p.ReorderLevel);
-
-        var parts = await q.OrderBy(p => p.Name)
-            .Select(p => new PartDto
+        var parts = await _context.Products
+            .Select(p => new ProductSummaryDto
             {
                 Id = p.Id,
-                SupplierId = p.SupplierId,
-                SupplierName = p.Supplier != null ? p.Supplier.Name : null,
-                CategoryId = p.CategoryId,
-                CategoryName = p.Category != null ? p.Category.Name : null,
                 Name = p.Name,
-                UnitPrice = p.UnitPrice,
-                CostPrice = p.CostPrice,
-                StockQty = p.StockQty,
-                ReorderLevel = p.ReorderLevel,
-                IsActive = p.IsActive,
-                IsLowStock = p.StockQty <= p.ReorderLevel,
-                IsOutOfStock = p.StockQty == 0,
-                UpdatedAt = p.UpdatedAt
+                Price = p.Price,
+                StockQty = p.StockQty
             })
             .ToListAsync();
 
-        return Ok(parts);
-    }
-
-    [HttpGet("{id:guid}")]
-    public async Task<IActionResult> GetById(Guid id)
-    {
-        var p = await _ctx.Set<Part>().Include(p => p.Supplier).Include(p => p.Category)
-            .FirstOrDefaultAsync(p => p.Id == id);
-        if (p == null) return NotFound();
-
-        return Ok(new PartDto
-        {
-            Id = p.Id,
-            SupplierId = p.SupplierId,
-            SupplierName = p.Supplier?.Name,
-            CategoryId = p.CategoryId,
-            CategoryName = p.Category?.Name,
-            Name = p.Name,
-            UnitPrice = p.UnitPrice,
-            CostPrice = p.CostPrice,
-            StockQty = p.StockQty,
-            ReorderLevel = p.ReorderLevel,
-            IsActive = p.IsActive,
-            IsLowStock = p.StockQty <= p.ReorderLevel,
-            IsOutOfStock = p.StockQty == 0,
-            UpdatedAt = p.UpdatedAt
-        });
+        return Ok(ApiResponse<object>.Ok(parts));
     }
 
     [HttpGet("low-stock")]
-    [Authorize(Roles = "Admin,Staff")]
-    public async Task<IActionResult> GetLowStock()
+    public async Task<IActionResult> GetLowStock([FromQuery] int threshold = 10)
     {
-        var parts = await _ctx.Set<Part>()
-            .Include(p => p.Category)
-            .Where(p => p.IsActive && p.StockQty <= p.ReorderLevel)
-            .Select(p => new PartDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                CategoryName = p.Category != null ? p.Category.Name : null,
-                StockQty = p.StockQty,
-                ReorderLevel = p.ReorderLevel,
-                IsLowStock = true,
-                IsOutOfStock = p.StockQty == 0
-            })
-            .ToListAsync();
+        try
+        {
+            var low = await _context.Products
+                .Where(p => p.StockQty < threshold)
+                .Select(p => new ProductSummaryDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    StockQty = p.StockQty
+                })
+                .ToListAsync();
 
-        return Ok(parts);
+            return Ok(ApiResponse<object>.Ok(low));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, ApiResponse<object>.Fail("Failed to load low-stock items."));
+        }
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetPartById(int id)
+    {
+        var part = await _context.Products.FindAsync(id);
+        if (part == null) return NotFound(ApiResponse<object>.Fail("Part not found"));
+        return Ok(ApiResponse<object>.Ok(part));
+    }
+
+    [Authorize(Roles = "Admin")]
     [HttpPost]
-    [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Create([FromBody] CreatePartDto dto)
+    public async Task<IActionResult> CreatePart(Product model)
     {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
-
-        if (dto.SupplierId.HasValue)
-        {
-            var supplierExists = await _ctx.Suppliers.AnyAsync(s => s.Id == dto.SupplierId.Value);
-            if (!supplierExists) return NotFound(new { message = "Supplier not found." });
-        }
-
-        if (dto.CategoryId.HasValue)
-        {
-            var categoryExists = await _ctx.Set<PartCategory>().AnyAsync(c => c.Id == dto.CategoryId.Value);
-            if (!categoryExists) return NotFound(new { message = "Category not found." });
-        }
-
-        var part = new Part
-        {
-            Name = dto.Name,
-            SupplierId = dto.SupplierId,
-            CategoryId = dto.CategoryId,
-            UnitPrice = dto.UnitPrice,
-            CostPrice = dto.CostPrice,
-            StockQty = dto.StockQty,
-            ReorderLevel = dto.ReorderLevel
-        };
-
-        _ctx.Add(part);
-
-        if (dto.StockQty > 0)
-        {
-            _ctx.Add(new StockMovement
-            {
-                PartId = part.Id,
-                ChangeQty = dto.StockQty,
-                MovementType = "purchase",
-                Notes = "Initial stock"
-            });
-        }
-
-        await _ctx.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetById), new { id = part.Id }, new { id = part.Id });
+        _context.Products.Add(model);
+        await _context.SaveChangesAsync();
+        return Ok(ApiResponse<object>.Ok(model));
     }
 
-    [HttpPut("{id:guid}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdatePartDto dto)
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePart(int id, Product model)
     {
-        var part = await _ctx.Set<Part>().FindAsync(id);
-        if (part == null) return NotFound();
+        var part = await _context.Products.FindAsync(id);
+        if (part == null) return NotFound(ApiResponse<object>.Fail("Part not found"));
 
-        if (dto.Name != null) part.Name = dto.Name;
-        if (dto.SupplierId != null) part.SupplierId = dto.SupplierId;
-        if (dto.CategoryId != null) part.CategoryId = dto.CategoryId;
-        if (dto.UnitPrice != null) part.UnitPrice = dto.UnitPrice.Value;
-        if (dto.CostPrice != null) part.CostPrice = dto.CostPrice.Value;
-        if (dto.ReorderLevel != null) part.ReorderLevel = dto.ReorderLevel.Value;
-        if (dto.IsActive != null) part.IsActive = dto.IsActive.Value;
+        part.Name = model.Name;
+        part.SKU = model.SKU;
+        part.Price = model.Price;
+        part.StockQty = model.StockQty;
 
-        if (dto.StockQty != null && dto.StockQty.Value != part.StockQty)
-        {
-            _ctx.Add(new StockMovement
-            {
-                PartId = part.Id,
-                ChangeQty = dto.StockQty.Value - part.StockQty,
-                MovementType = "adjustment",
-                Notes = "Manual adjustment"
-            });
-            part.StockQty = dto.StockQty.Value;
-        }
-
-        part.UpdatedAt = DateTime.UtcNow;
-        await _ctx.SaveChangesAsync();
-        return Ok(new { message = "Part updated." });
+        await _context.SaveChangesAsync();
+        return Ok(ApiResponse<object>.Ok(part));
     }
 
-    [HttpDelete("{id:guid}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Delete(Guid id)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePart(int id)
     {
-        var part = await _ctx.Set<Part>().FindAsync(id);
-        if (part == null) return NotFound();
+        var part = await _context.Products.FindAsync(id);
+        if (part == null) return NotFound(ApiResponse<object>.Fail("Part not found"));
 
-        part.IsActive = false;
-        part.UpdatedAt = DateTime.UtcNow;
-        await _ctx.SaveChangesAsync();
-        return Ok(new { message = "Part deactivated." });
+        _context.Products.Remove(part);
+        await _context.SaveChangesAsync();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }));
     }
 }

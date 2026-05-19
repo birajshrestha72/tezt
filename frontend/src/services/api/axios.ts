@@ -1,40 +1,42 @@
-const baseUrl = import.meta.env.VITE_API_BASE_URL ?? '/api';
+/// <reference types="vite/client" />
+import axios from 'axios';
+import { clearAuthSession, getAuthToken } from './authService';
 
-export default {
-  async get<T>(url: string): Promise<{ data: T }> {
-    const response = await fetch(`${baseUrl}${url}`, { credentials: 'include' });
-    const data = await response.json();
-    return { data } as { data: T };
-  },
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
 
-  async post<T>(url: string, body: unknown): Promise<{ data: T }> {
-    const response = await fetch(`${baseUrl}${url}`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    const data = await response.json();
-    return { data } as { data: T };
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
   },
+});
 
-  async put<T>(url: string, body?: unknown): Promise<{ data: T }> {
-    const response = await fetch(`${baseUrl}${url}`, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: body !== undefined ? JSON.stringify(body) : undefined,
-    });
-    const data = await response.json();
-    return { data } as { data: T };
+// Interceptor for JWT token
+api.interceptors.request.use(
+  (config) => {
+    const token = getAuthToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
-  async delete<T>(url: string): Promise<{ data: T }> {
-    const response = await fetch(`${baseUrl}${url}`, {
-      method: 'DELETE',
-      credentials: 'include',
-    });
-    const data = await response.json();
-    return { data } as { data: T };
-  },
-};
+// Interceptor for response errors (e.g., unauthorized)
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      clearAuthSession();
+      if (globalThis.location?.pathname !== '/login') {
+        globalThis.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export default api;

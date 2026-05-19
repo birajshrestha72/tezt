@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand */
+  --red:              #D62828;
+  --red-hover:        #bd1119;
+  --red-dim:          rgba(214,40,40,0.15);
+  --red-bright:       #ffb4ab;
+  --amber:            #FCBF49;
+  --amber-dim:        rgba(252,191,73,0.15);
+  --orange:           #F77F00;
+  --cream:            #EAE2B7;
+  --navy:             #003049;
+
+  /* Backgrounds — matches Stitch Industrial Precision exactly */
+  --bg-page:          #001523;
+  --bg-sidebar:       #002235;
+  --bg-card:          #002235;
+  --bg-card-high:     #002d45;
+  --bg-card-highest:  #0c3851;
+  --bg-card-low:      #001e2f;
+  --bg-card-lowest:   #00101c;
+  --bg-input:         #001e2f;
+
+  /* Text */
+  --text-primary:     #cae6ff;
+  --text-secondary:   #e5bdb9;
+  --text-muted:       #ac8884;
+  --text-on-red:      #fff1ef;
+  --text-inverse:     #05344d;
+
+  /* Semantic */
+  --success:          #4ade80;
+  --success-bg:       rgba(74,222,128,0.10);
+  --success-border:   rgba(74,222,128,0.25);
+  --warning:          #F77F00;
+  --warning-bg:       rgba(247,127,0,0.10);
+  --warning-border:   rgba(247,127,0,0.30);
+  --danger:           #D62828;
+  --danger-bg:        rgba(214,40,40,0.10);
+  --danger-border:    rgba(214,40,40,0.30);
+  --info:             #92ccff;
+  --info-bg:          rgba(146,204,255,0.10);
+  --info-border:      rgba(146,204,255,0.25);
+
+  /* Borders */
+  --border:           #5c403d;
+  --border-md:        #ac8884;
+
+  /* Layout */
+  --sidebar-w:        260px;
+  --navbar-h:         64px;
+
+  /* Shape */
+  --r-sm:  4px;
+  --r:     8px;
+  --r-lg:  12px;
+  --r-xl:  16px;
+  --r-full:9999px;
+
+  /* Typography scale — exact Stitch values */
+  --label-sm:  12px;
+  --label-md:  14px;
+  --body-sm:   13px;
+  --body-md:   14px;
+  --body-lg:   16px;
+  --head-sm:   18px;
+  --head-md:   24px;
+  --head-lg:   32px;
+
+  /* Spacing */
+  --xs: 4px;
+  --sm: 8px;
+  --md: 16px;
+  --lg: 24px;
+  --xl: 32px;
+
+  /* Shadow */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.40);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.50);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.60);
+
+  --transition: 0.18s ease;
+  --font: 'Inter', system-ui, sans-serif;
+}

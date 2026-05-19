@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VehiclePartsAPI.DTOs;
@@ -30,15 +31,15 @@ public class ProductsController : ControllerBase
                 SupplierId = p.SupplierId
             })
             .ToListAsync();
-        return Ok(products);
+        return Ok(ApiResponse<object>.Ok(products));
     }
 
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
         var product = await _context.Products.FindAsync(id);
-        if (product == null) return NotFound();
-        return Ok(new ProductDto
+        if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
+        return Ok(ApiResponse<object>.Ok(new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -47,27 +48,28 @@ public class ProductsController : ControllerBase
             StockQty = product.StockQty,
             CategoryId = product.CategoryId,
             SupplierId = product.SupplierId
-        });
+        }));
     }
 
     [HttpGet("{id:int}/supplier")]
     public async Task<IActionResult> GetSupplier(int id)
     {
         var product = await _context.Products.Include(p => p.Supplier).FirstOrDefaultAsync(p => p.Id == id);
-        if (product == null) return NotFound();
+        if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
         var s = product.Supplier;
-        return Ok(new SupplierDto { Id = s.Id, Name = s.Name, Email = s.Email, Phone = s.Phone });
+        return Ok(ApiResponse<object>.Ok(new SupplierDto { Id = s.Id, Name = s.Name, Email = s.Email, Phone = s.Phone }));
     }
 
     [HttpGet("{id:int}/category")]
     public async Task<IActionResult> GetCategory(int id)
     {
         var product = await _context.Products.Include(p => p.Category).FirstOrDefaultAsync(p => p.Id == id);
-        if (product == null) return NotFound();
+        if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
         var c = product.Category;
-        return Ok(new CategoryDto { Id = c.Id, Name = c.Name });
+        return Ok(ApiResponse<object>.Ok(new CategoryDto { Id = c.Id, Name = c.Name }));
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductDto dto)
     {
@@ -86,7 +88,7 @@ public class ProductsController : ControllerBase
         {
             await _notificationService.Add($"Low stock for product {product.Name}");
         }
-        return CreatedAtAction(nameof(GetById), new { id = product.Id }, new ProductDto
+        return StatusCode(StatusCodes.Status201Created, ApiResponse<ProductDto>.Ok(new ProductDto
         {
             Id = product.Id,
             Name = product.Name,
@@ -95,14 +97,15 @@ public class ProductsController : ControllerBase
             StockQty = product.StockQty,
             CategoryId = product.CategoryId,
             SupplierId = product.SupplierId
-        });
+        }, "Product created successfully"));
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateProductDto dto)
     {
         var product = await _context.Products.FindAsync(id);
-        if (product == null) return NotFound();
+        if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
 
         product.Name = dto.Name;
         product.SKU = dto.SKU;
@@ -112,18 +115,19 @@ public class ProductsController : ControllerBase
         product.SupplierId = dto.SupplierId;
 
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { updated = true }, "Product updated successfully"));
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {
         var product = await _context.Products.FindAsync(id);
-        if (product == null) return NotFound();
+        if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
 
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
-        return NoContent();
+        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Product deleted successfully"));
     }
 
     [HttpPost("bulk")]
@@ -140,7 +144,7 @@ public class ProductsController : ControllerBase
         }).ToList();
         await _context.Products.AddRangeAsync(products);
         await _context.SaveChangesAsync();
-        return Ok(new { inserted = products.Count });
+        return Ok(ApiResponse<object>.Ok(new { inserted = products.Count }, "Products inserted successfully"));
     }
 
     [HttpGet("with-details")]
@@ -158,12 +162,12 @@ public class ProductsController : ControllerBase
                 Supplier = new SupplierDto { Id = p.Supplier.Id, Name = p.Supplier.Name, Email = p.Supplier.Email, Phone = p.Supplier.Phone }
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpGet("count")]
     public async Task<IActionResult> Count()
-        => Ok(new { totalProducts = await _context.Products.CountAsync() });
+        => Ok(ApiResponse<object>.Ok(new { totalProducts = await _context.Products.CountAsync() }));
 
     [HttpGet("high-price")]
     public async Task<IActionResult> HighPrice([FromQuery] decimal minPrice = 100)
@@ -181,7 +185,7 @@ public class ProductsController : ControllerBase
                 SupplierId = p.SupplierId
             })
             .ToListAsync();
-        return Ok(data);
+        return Ok(ApiResponse<object>.Ok(data));
     }
 
     [HttpPut("bulk-update-price")]
@@ -197,6 +201,6 @@ public class ProductsController : ControllerBase
         }
 
         await _context.SaveChangesAsync();
-        return Ok(new { updated = products.Count });
+        return Ok(ApiResponse<object>.Ok(new { updated = products.Count }, "Prices updated successfully"));
     }
 }

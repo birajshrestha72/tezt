@@ -1,25 +1,18 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace VehiclePartsAPI.Models
+public class Staff
 {
-    [Table("staff")]
-    public class Staff
-    {
-        [Key]
-        public Guid Id { get; set; }
-        
-        [Required]
-        public Guid UserId { get; set; }
-        
-        [ForeignKey("UserId")]
-        public virtual User? User { get; set; }
-        
-        [Required]
-        public string Department { get; set; }
+    public int Id { get; set; }
 
-        public string? EmployeeCode { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
-        public DateTime? JoinedAt { get; set; }
-    }
+    public string LastName { get; set; } = string.Empty;
+
+    public string Email { get; set; } = string.Empty;
+
+    public string Role { get; set; } = string.Empty;
+
+    public bool IsActive { get; set; } = true;
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? LastLoginAt { get; set; }
+    public string? PasswordHash { get; set; }
 }
