@@ -133,6 +133,29 @@ public class OrdersController : ControllerBase
                 return BadRequest(ApiResponse<object>.Fail("Invalid order data."));
             }
 
+            if (dto.Items == null || dto.Items.Count == 0)
+            {
+                return BadRequest(ApiResponse<object>.Fail("At least one order item is required."));
+            }
+
+            var customerExists = await _context.Customers.AnyAsync(customer => customer.Id == dto.CustomerId);
+            if (!customerExists)
+            {
+                return BadRequest(ApiResponse<object>.Fail("Invalid customer."));
+            }
+
+            var productIds = dto.Items.Select(item => item.ProductId).Distinct().ToList();
+            var products = await _context.Products.Where(product => productIds.Contains(product.Id)).ToListAsync();
+            if (products.Count != productIds.Count)
+            {
+                return BadRequest(ApiResponse<object>.Fail("One or more products are invalid."));
+            }
+
+            if (dto.Items.Any(item => item.Quantity <= 0 || item.UnitPrice <= 0))
+            {
+                return BadRequest(ApiResponse<object>.Fail("Each order item must have a quantity and unit price greater than zero."));
+            }
+
             var orderDate = dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate;
             var order = new Order
             {
@@ -166,6 +189,11 @@ public class OrdersController : ControllerBase
             foreach (var orderItem in persistedOrder.OrderItems)
             {
                 var product = orderItem.Product;
+                if (product == null)
+                {
+                    return BadRequest(ApiResponse<object>.Fail($"Product {orderItem.ProductId} could not be found."));
+                }
+
                 product.StockQty = Math.Max(0, product.StockQty - orderItem.Quantity);
                 await NotifyLowStockIfNeeded(product, $"order:{persistedOrder.Id}");
             }
@@ -180,6 +208,10 @@ public class OrdersController : ControllerBase
                 totalAmount = subtotal - discount,
                 loyaltyDiscountApplied = persistedOrder.LoyaltyDiscountApplied
             }, "Order created successfully"));
+        }
+        catch (DbUpdateException)
+        {
+            return BadRequest(ApiResponse<object>.Fail("The order could not be saved because one of the referenced records is invalid."));
         }
         catch (Exception ex)
         {

@@ -64,7 +64,7 @@ public class CustomersController : ControllerBase
     {
         try
         {
-            if (User.IsInRole("Customer") && GetCurrentUserId() != id)
+            if (User.IsInRole("Customer") && !await IsCurrentCustomerAsync(id))
             {
                 return Forbid();
             }
@@ -86,7 +86,7 @@ public class CustomersController : ControllerBase
     {
         try
         {
-            if (User.IsInRole("Customer") && GetCurrentUserId() != id)
+            if (User.IsInRole("Customer") && !await IsCurrentCustomerAsync(id))
             {
                 return Forbid();
             }
@@ -218,7 +218,7 @@ public class CustomersController : ControllerBase
         }
     }
 
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin,Staff,Customer")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateCustomerDto dto)
     {
@@ -227,6 +227,11 @@ public class CustomersController : ControllerBase
             if (!ModelState.IsValid)
             {
                 return BadRequest(ApiResponse<object>.Fail("Invalid customer data."));
+            }
+
+            if (User.IsInRole("Customer") && !await IsCurrentCustomerAsync(id))
+            {
+                return Forbid();
             }
 
             var customer = await _context.Customers.FirstOrDefaultAsync(item => item.Id == id);
@@ -357,6 +362,28 @@ public class CustomersController : ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load customer details: {ex.Message}"));
         }
+    }
+
+    private async Task<bool> IsCurrentCustomerAsync(int customerId)
+    {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId.HasValue && currentUserId.Value == customerId)
+        {
+            return true;
+        }
+
+        var currentEmail = User.FindFirstValue(ClaimTypes.Email);
+        if (string.IsNullOrWhiteSpace(currentEmail))
+        {
+            return false;
+        }
+
+        var matchedCustomerId = await _context.Customers
+            .Where(customer => customer.Email == currentEmail)
+            .Select(customer => (int?)customer.Id)
+            .FirstOrDefaultAsync();
+
+        return matchedCustomerId.HasValue && matchedCustomerId.Value == customerId;
     }
 
     private static CustomerDto MapCustomer(Customer customer)

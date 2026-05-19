@@ -86,6 +86,12 @@ public class AppointmentController : ControllerBase
                 return Forbid();
             }
 
+            var customerExists = await _context.Customers.AnyAsync(customer => customer.Id == dto.CustomerId);
+            if (!customerExists)
+            {
+                return BadRequest(ApiResponse<object>.Fail("Invalid customer."));
+            }
+
             var appointment = new Appointment
             {
                 CustomerId = dto.CustomerId,
@@ -103,6 +109,10 @@ public class AppointmentController : ControllerBase
                 .FirstAsync(item => item.Id == appointment.Id);
 
             return StatusCode(StatusCodes.Status201Created, ApiResponse<object>.Ok(MapAppointment(created), "Appointment created successfully."));
+        }
+        catch (DbUpdateException)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Unable to create appointment with the provided data."));
         }
         catch (Exception ex)
         {
