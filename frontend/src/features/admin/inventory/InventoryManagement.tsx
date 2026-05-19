@@ -14,6 +14,7 @@ export default function InventoryManagement() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState('');
+  const [supplierFilter, setSupplierFilter] = useState('');
   const [lowStockOnly, setLowStockOnly] = useState(false);
   const [page, setPage] = useState(1);
   const [addOpen, setAddOpen] = useState(false);
@@ -42,11 +43,14 @@ export default function InventoryManagement() {
     const q = search.toLowerCase();
     return products.filter(p => {
       const matchSearch = !q || p.name.toLowerCase().includes(q) || p.sku.toLowerCase().includes(q);
-      const matchCat = !catFilter || String(p.categoryId) === catFilter;
+      const productCategoryId = p.category?.id ?? p.categoryId;
+      const productSupplierId = p.supplier?.id ?? p.supplierId;
+      const matchCat = !catFilter || String(productCategoryId) === catFilter;
+      const matchSup = !supplierFilter || String(productSupplierId) === supplierFilter;
       const matchLow = !lowStockOnly || p.stockQty < 10;
-      return matchSearch && matchCat && matchLow;
+      return matchSearch && matchCat && matchSup && matchLow;
     });
-  }, [products, search, catFilter, lowStockOnly]);
+  }, [products, search, catFilter, supplierFilter, lowStockOnly]);
 
   const paged = filtered.slice((page - 1) * PAGE, page * PAGE);
   const lowStockCount = products.filter(p => p.stockQty < 10).length;
@@ -92,7 +96,7 @@ export default function InventoryManagement() {
         </div>
       ),
     },
-    { key: 'category', label: 'Category', render: r => <Badge variant="amber">{r.category?.name ?? '—'}</Badge> },
+    { key: 'category', label: 'Category', render: r => <Badge variant="amber">{r.category?.name ?? (r.categoryId ? `Category #${r.categoryId}` : 'Uncategorized')}</Badge> },
     { key: 'supplier', label: 'Supplier', render: r => <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{r.supplier?.name ?? '—'}</span> },
     { key: 'price', label: 'Price', align: 'right', render: r => <strong>${r.price.toFixed(2)}</strong> },
     {
@@ -182,6 +186,11 @@ export default function InventoryManagement() {
         <select className="form-select" style={{ width: 160 }} value={catFilter} onChange={e => { setCatFilter(e.target.value); setPage(1); }}>
           <option value="">All Categories</option>
           {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
+
+        <select className="form-select" style={{ width: 200, marginLeft: 8 }} value={supplierFilter} onChange={e => { setSupplierFilter(e.target.value); setPage(1); }}>
+          <option value="">All Suppliers</option>
+          {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
         </select>
         <button
           className={`btn btn-sm ${lowStockOnly ? 'btn-warning' : 'btn-secondary'}`}

@@ -69,6 +69,8 @@ export default function PurchaseOrders() {
   const handleCreate = async () => {
     if (!supplierId) { toast.error('Please select a supplier.'); return; }
     if (lines.some(l => !l.productId)) { toast.error('Please select a product for each line.'); return; }
+    if (lines.some(l => !(l.quantity >= 1))) { toast.error('Each line must have quantity of at least 1.'); return; }
+    if (lines.some(l => !(l.unitCost >= 0.01))) { toast.error('Each line must have a unit cost of at least $0.01.'); return; }
     setSubmitting(true);
     try {
       await purchaseOrderService.create({

@@ -73,6 +73,18 @@ public class ProductsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductDto dto)
     {
+        var categoryExists = await _context.Categories.AnyAsync(category => category.Id == dto.CategoryId);
+        if (!categoryExists)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Invalid category."));
+        }
+
+        var supplierExists = await _context.Suppliers.AnyAsync(supplier => supplier.Id == dto.SupplierId);
+        if (!supplierExists)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Invalid supplier."));
+        }
+
         var product = new Product
         {
             Name = dto.Name,
@@ -107,6 +119,18 @@ public class ProductsController : ControllerBase
         var product = await _context.Products.FindAsync(id);
         if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
 
+        var categoryExists = await _context.Categories.AnyAsync(category => category.Id == dto.CategoryId);
+        if (!categoryExists)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Invalid category."));
+        }
+
+        var supplierExists = await _context.Suppliers.AnyAsync(supplier => supplier.Id == dto.SupplierId);
+        if (!supplierExists)
+        {
+            return BadRequest(ApiResponse<object>.Fail("Invalid supplier."));
+        }
+
         product.Name = dto.Name;
         product.SKU = dto.SKU;
         product.Price = dto.Price;
@@ -125,9 +149,23 @@ public class ProductsController : ControllerBase
         var product = await _context.Products.FindAsync(id);
         if (product == null) return NotFound(ApiResponse<object>.Fail("Product not found"));
 
-        _context.Products.Remove(product);
-        await _context.SaveChangesAsync();
-        return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Product deleted successfully"));
+        var isInUse = await _context.OrderItems.AnyAsync(orderItem => orderItem.ProductId == id)
+            || await _context.PurchaseOrderItems.AnyAsync(item => item.ProductId == id);
+        if (isInUse)
+        {
+            return Conflict(ApiResponse<object>.Fail("Product is referenced by existing orders or purchase orders and cannot be deleted."));
+        }
+
+        try
+        {
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
+            return Ok(ApiResponse<object>.Ok(new { deleted = id }, "Product deleted successfully"));
+        }
+        catch (DbUpdateException)
+        {
+            return Conflict(ApiResponse<object>.Fail("Product could not be deleted because it is referenced by other records."));
+        }
     }
 
     [HttpPost("bulk")]
@@ -158,6 +196,8 @@ public class ProductsController : ControllerBase
                 p.SKU,
                 p.Price,
                 p.StockQty,
+                p.CategoryId,
+                p.SupplierId,
                 Category = new CategoryDto { Id = p.Category.Id, Name = p.Category.Name },
                 Supplier = new SupplierDto { Id = p.Supplier.Id, Name = p.Supplier.Name, Email = p.Supplier.Email, Phone = p.Supplier.Phone }
             })
