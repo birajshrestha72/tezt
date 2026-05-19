@@ -122,7 +122,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 }
 
 function buildNav(role: string | undefined, unreadCount: number): NavGroup[] {
-  if (role === 'Admin') {
+  const isAdmin = role === 'Admin';
+  const isCustomer = role === 'Customer';
+  const isStaffLike = !!role && !isAdmin && !isCustomer;
+
+  if (isAdmin) {
     return [
       {
         group: 'MAIN',
@@ -158,13 +162,14 @@ function buildNav(role: string | undefined, unreadCount: number): NavGroup[] {
     ];
   }
 
-  if (role === 'Staff') {
+  if (isStaffLike) {
     return [
       {
         group: 'MAIN',
         items: [
           { to: '/staff/dashboard', label: 'Dashboard',       icon: <MdDashboard /> },
           { to: '/staff/sales',     label: 'New Sale',        icon: <MdAddShoppingCart /> },
+          { to: '/staff/purchase',  label: 'Purchase Orders', icon: <MdShoppingCart /> },
           { to: '/staff/customers', label: 'Customers',       icon: <MdSearch /> },
         ],
       },

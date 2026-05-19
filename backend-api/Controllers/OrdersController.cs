@@ -156,11 +156,16 @@ public class OrdersController : ControllerBase
                 return BadRequest(ApiResponse<object>.Fail("Each order item must have a quantity and unit price greater than zero."));
             }
 
-            var orderDate = dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate;
+            if (dto.Items.Select(item => item.ProductId).Distinct().Count() != dto.Items.Count)
+            {
+                return BadRequest(ApiResponse<object>.Fail("Duplicate products are not allowed in a single order."));
+            }
+
+            var orderDate = NormalizeUtc(dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate);
             var order = new Order
             {
                 OrderDate = orderDate,
-                CreditDueDate = dto.CreditDueDate ?? orderDate.AddDays(30),
+                CreditDueDate = NormalizeUtc(dto.CreditDueDate ?? orderDate.AddDays(30)),
                 AmountPaid = dto.AmountPaid,
                 Status = string.IsNullOrWhiteSpace(dto.Status) ? "Pending" : dto.Status,
                 CustomerId = dto.CustomerId,
@@ -195,7 +200,14 @@ public class OrdersController : ControllerBase
                 }
 
                 product.StockQty = Math.Max(0, product.StockQty - orderItem.Quantity);
-                await NotifyLowStockIfNeeded(product, $"order:{persistedOrder.Id}");
+                try
+                {
+                    await NotifyLowStockIfNeeded(product, $"order:{persistedOrder.Id}");
+                }
+                catch
+                {
+                    // Low-stock notification failures must not block order creation.
+                }
             }
 
             await _context.SaveChangesAsync();
@@ -274,8 +286,8 @@ public class OrdersController : ControllerBase
             var order = await _context.Orders.Include(item => item.OrderItems).FirstOrDefaultAsync(item => item.Id == id);
             if (order == null) return NotFound(ApiResponse<object>.Fail("Order not found"));
 
-            order.OrderDate = dto.OrderDate;
-            order.CreditDueDate = dto.CreditDueDate ?? dto.OrderDate.AddDays(30);
+            order.OrderDate = NormalizeUtc(dto.OrderDate);
+            order.CreditDueDate = NormalizeUtc(dto.CreditDueDate ?? dto.OrderDate.AddDays(30));
             order.AmountPaid = dto.AmountPaid;
             order.Status = dto.Status;
             order.CustomerId = dto.CustomerId;
@@ -329,8 +341,8 @@ public class OrdersController : ControllerBase
         {
             var orders = dtos.Select(dto => new Order
             {
-                OrderDate = dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate,
-                CreditDueDate = dto.CreditDueDate ?? ((dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate).AddDays(30)),
+                OrderDate = NormalizeUtc(dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate),
+                CreditDueDate = NormalizeUtc(dto.CreditDueDate ?? (dto.OrderDate == default ? DateTime.UtcNow : dto.OrderDate).AddDays(30)),
                 AmountPaid = dto.AmountPaid,
                 Status = string.IsNullOrWhiteSpace(dto.Status) ? "Pending" : dto.Status,
                 CustomerId = dto.CustomerId,
@@ -507,6 +519,16 @@ public class OrdersController : ControllerBase
     private static decimal GetOrderSubtotal(Order order)
     {
         return order.OrderItems.Sum(orderItem => orderItem.Quantity * orderItem.UnitPrice);
+    }
+
+    private static DateTime NormalizeUtc(DateTime value)
+    {
+        return value.Kind switch
+        {
+            DateTimeKind.Utc => value,
+            DateTimeKind.Local => value.ToUniversalTime(),
+            _ => DateTime.SpecifyKind(value, DateTimeKind.Utc)
+        };
     }
 
     private static OrderDto MapOrderDto(Order order)

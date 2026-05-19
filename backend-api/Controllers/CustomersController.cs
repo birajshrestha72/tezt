@@ -378,8 +378,10 @@ public class CustomersController : ControllerBase
             return false;
         }
 
+        var normalizedEmail = currentEmail.Trim().ToLower();
+
         var matchedCustomerId = await _context.Customers
-            .Where(customer => customer.Email == currentEmail)
+            .Where(customer => customer.Email.ToLower() == normalizedEmail)
             .Select(customer => (int?)customer.Id)
             .FirstOrDefaultAsync();
 

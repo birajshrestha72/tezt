@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using VehiclePartsAPI.DTOs;
 
 [ApiController]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,Staff")]
 [Route("api/[controller]")]
 public class PurchaseOrderController : ControllerBase
 {

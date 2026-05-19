@@ -31,8 +31,12 @@ export default function LoginPage() {
     setServerError('');
     try {
       const user = await login(data);
-      if (user.role === 'Admin') navigate('/admin/dashboard', { replace: true });
-      else if (user.role === 'Staff') navigate('/staff/dashboard', { replace: true });
+      const isAdmin = user.role === 'Admin';
+      const isCustomer = user.role === 'Customer';
+      const isStaffLike = !isAdmin && !isCustomer;
+
+      if (isAdmin) navigate('/admin/dashboard', { replace: true });
+      else if (isStaffLike) navigate('/staff/dashboard', { replace: true });
       else navigate('/customer/home', { replace: true });
     } catch (err: unknown) {
       const e = err as { response?: { data?: { message?: string } } };
