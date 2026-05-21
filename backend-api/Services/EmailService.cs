@@ -47,9 +47,12 @@ public class EmailService
         }
 
         var message = new MimeMessage();
-        message.From.Add(MailboxAddress.Parse(_smtpOptions.FromAddress));
+        var fromName = string.IsNullOrWhiteSpace(_smtpOptions.AppName) ? _smtpOptions.FromAddress : _smtpOptions.AppName;
+        message.From.Add(new MailboxAddress(fromName, _smtpOptions.FromAddress));
         message.To.Add(MailboxAddress.Parse(toEmail));
-        message.Subject = subject;
+        message.Subject = string.IsNullOrWhiteSpace(_smtpOptions.AppName)
+            ? subject
+            : $"[{_smtpOptions.AppName}] {subject}";
         message.Body = new BodyBuilder { HtmlBody = htmlBody }.ToMessageBody();
 
         using var client = new SmtpClient();
