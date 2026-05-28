@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MdAddShoppingCart, MdSearch, MdAssessment, MdReceipt } from 'react-icons/md';
+import { MdAddShoppingCart, MdSearch, MdAssessment, MdReceipt, MdShoppingCart } from 'react-icons/md';
 import { useAuth } from '../../context/AuthContext';
 import { orderService, type OrderListItem } from '../../services/api/orderService';
 import { reportService } from '../../services/api/reportService';
@@ -51,6 +51,7 @@ export default function StaffDashboard() {
 
   const QUICK = [
     { label: 'New Sale',       icon: <MdAddShoppingCart />, path: '/staff/sales' },
+    { label: 'Purchase Orders',icon: <MdShoppingCart />,    path: '/staff/purchase' },
     { label: 'Customer Search',icon: <MdSearch />,          path: '/staff/customers' },
     { label: 'View Reports',   icon: <MdAssessment />,      path: '/staff/reports' },
     { label: 'All Orders',     icon: <MdReceipt />,         path: '/staff/sales' },
@@ -85,7 +86,7 @@ export default function StaffDashboard() {
         <StatCard loading={false} label="Create Sale" value="→" hint="Process a new order" accentColor="var(--success)" onClick={() => navigate('/staff/sales')} />
       </div>
 
-      <div className="quick-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: 'var(--xl)' }}>
+      <div className="quick-grid" style={{ gridTemplateColumns: 'repeat(5, 1fr)', marginBottom: 'var(--xl)' }}>
         {QUICK.map(q => (
           <button key={q.label} className="quick-btn" onClick={() => navigate(q.path)}>
             {q.icon}

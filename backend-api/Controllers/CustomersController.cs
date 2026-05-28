@@ -64,7 +64,7 @@ public class CustomersController : ControllerBase
     {
         try
         {
-            if (User.IsInRole("Customer") && GetCurrentUserId() != id)
+            if (User.IsInRole("Customer") && !await IsCurrentCustomerAsync(id))
             {
                 return Forbid();
             }
@@ -86,7 +86,7 @@ public class CustomersController : ControllerBase
     {
         try
         {
-            if (User.IsInRole("Customer") && GetCurrentUserId() != id)
+            if (User.IsInRole("Customer") && !await IsCurrentCustomerAsync(id))
             {
                 return Forbid();
             }
@@ -229,7 +229,7 @@ public class CustomersController : ControllerBase
                 return BadRequest(ApiResponse<object>.Fail("Invalid customer data."));
             }
 
-            if (User.IsInRole("Customer") && GetCurrentUserId() != id)
+            if (User.IsInRole("Customer") && !await IsCurrentCustomerAsync(id))
             {
                 return Forbid();
             }
@@ -424,6 +424,30 @@ public class CustomersController : ControllerBase
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load customer details: {ex.Message}"));
         }
+    }
+
+    private async Task<bool> IsCurrentCustomerAsync(int customerId)
+    {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId.HasValue && currentUserId.Value == customerId)
+        {
+            return true;
+        }
+
+        var currentEmail = User.FindFirstValue(ClaimTypes.Email);
+        if (string.IsNullOrWhiteSpace(currentEmail))
+        {
+            return false;
+        }
+
+        var normalizedEmail = currentEmail.Trim().ToLower();
+
+        var matchedCustomerId = await _context.Customers
+            .Where(customer => customer.Email.ToLower() == normalizedEmail)
+            .Select(customer => (int?)customer.Id)
+            .FirstOrDefaultAsync();
+
+        return matchedCustomerId.HasValue && matchedCustomerId.Value == customerId;
     }
 
     private static CustomerDto MapCustomer(Customer customer)

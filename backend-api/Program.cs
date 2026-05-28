@@ -171,4 +171,5 @@ public class SmtpOptions
     public string User { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     public string FromAddress { get; set; } = string.Empty;
+    public string AppName { get; set; } = string.Empty;
 }

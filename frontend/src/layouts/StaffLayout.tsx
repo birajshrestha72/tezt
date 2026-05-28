@@ -6,6 +6,7 @@ import Navbar from '../components/navigation/Navbar';
 const TITLES: Record<string, string> = {
   '/staff/dashboard': 'Staff Dashboard',
   '/staff/sales':     'Create New Sale',
+  '/staff/purchase':  'Purchase Orders',
   '/staff/customers': 'Customer Search',
   '/staff/reports':   'Staff Reports',
 };

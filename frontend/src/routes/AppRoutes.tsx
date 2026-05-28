@@ -85,6 +85,7 @@ export default function AppRoutes() {
       >
         <Route path="dashboard"  element={<StaffDashboard />} />
         <Route path="sales"      element={<StaffSales />} />
+        <Route path="purchase"   element={<PurchaseOrders />} />
         <Route path="customers"  element={<StaffCustomerSearch />} />
         <Route path="reports"    element={<StaffReports />} />
       </Route>
