@@ -72,8 +72,8 @@ export default function CustomerVehicleHealth() {
   if (!hasVehicle) {
     return (
       <div>
-        <div className="page-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sm)' }}>
+        <div className="page-header customer-page-header">
+          <div className="customer-page-header__title">
             <MdAutoFixHigh style={{ fontSize: 26, color: 'var(--amber)' }} />
             <h2 className="page-title">Vehicle Health</h2>
           </div>
@@ -93,20 +93,20 @@ export default function CustomerVehicleHealth() {
 
   return (
     <div>
-      <div className="page-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sm)' }}>
+      <div className="page-header customer-page-header">
+        <div className="customer-page-header__title">
           <MdAutoFixHigh style={{ fontSize: 26, color: 'var(--amber)' }} />
           <h2 className="page-title">Vehicle Health</h2>
         </div>
       </div>
 
-      <div className="vehicle-header" style={{ marginBottom: 'var(--xl)' }}>
+      <div className="vehicle-header vehicle-health-hero">
         <div className="vehicle-header__icon"><MdDirectionsCar /></div>
-        <div style={{ flex: 1 }}>
-          <p style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{user?.vehicleMake} {user?.vehicleModel} {user?.vehicleYear}</p>
-          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>{user?.vehicleType || 'Vehicle'} · Plate: {user?.vehicleNumber || '—'}</p>
+        <div className="vehicle-health-hero__content">
+          <p className="vehicle-health-hero__title">{user?.vehicleMake} {user?.vehicleModel} {user?.vehicleYear}</p>
+          <p className="vehicle-health-hero__meta">{user?.vehicleType || 'Vehicle'} · Plate: {user?.vehicleNumber || '—'}</p>
         </div>
-        <button className="btn btn-primary" onClick={runDiagnostics} disabled={loading}>
+        <button className="btn btn-primary vehicle-health-hero__action" onClick={runDiagnostics} disabled={loading}>
           {loading
             ? <span className="spinner" style={{ width: 16, height: 16, borderWidth: 2 }} />
             : <><MdAutoFixHigh /> Run AI Diagnostics</>}
@@ -114,7 +114,7 @@ export default function CustomerVehicleHealth() {
       </div>
 
       {ran && health && (
-        <div className="stats-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', marginBottom: 'var(--xl)' }}>
+        <div className="stats-grid vehicle-health-stats">
           <StatCard
             label="Overall Health"
             value={health}
@@ -134,7 +134,7 @@ export default function CustomerVehicleHealth() {
       )}
 
       {!ran && !loading && (
-        <div className="card" style={{ padding: 'var(--xl)', textAlign: 'center' }}>
+        <div className="card vehicle-health-empty">
           <MdAutoFixHigh style={{ fontSize: 48, color: 'var(--amber)', marginBottom: 'var(--md)' }} />
           <p style={{ color: 'var(--text-muted)', marginBottom: 'var(--lg)' }}>Run AI diagnostics to see vehicle health predictions.</p>
           <button className="btn btn-primary" onClick={runDiagnostics}>Run Diagnostics</button>
@@ -142,7 +142,7 @@ export default function CustomerVehicleHealth() {
       )}
 
       {ran && (predictions.length === 0) && !loading && (
-        <div className="card" style={{ padding: 'var(--xl)', textAlign: 'center' }}>
+        <div className="card vehicle-health-empty">
           <MdCheckCircle style={{ fontSize: 48, color: 'var(--success)', marginBottom: 'var(--md)' }} />
           <p style={{ fontWeight: 700, color: 'var(--text-primary)' }}>All Systems Nominal</p>
           <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>No issues detected. Your vehicle looks healthy!</p>

@@ -56,9 +56,82 @@
 /* ORDER LINE ITEMS IN SALES */
 .order-item-row { display: grid; grid-template-columns: 1fr 80px 120px 100px 32px; gap: var(--md); align-items: center; margin-bottom: var(--sm); }
 
+/* STAFF CUSTOMER SEARCH */
+.customer-search-panel { padding: var(--lg); margin-bottom: var(--xl); }
+.customer-search-fields { display: flex; flex-direction: column; gap: var(--md); }
+.customer-search-grid,
+.sales-customer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--md); }
+.customer-search-card,
+.sales-customer-card { padding: var(--md); text-align: left; display: flex; gap: var(--md); align-items: flex-start; width: 100%; }
+.customer-search-card { cursor: pointer; }
+.customer-search-card.selected { border: 2px solid var(--red); background: var(--bg-card); }
+.customer-search-card__content { flex: 1; min-width: 0; }
+.customer-search-card__name,
+.sales-customer-card__name { font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+.customer-search-card__meta,
+.sales-customer-card__meta { font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; line-height: 1.4; }
+.customer-search-empty,
+.sales-customer-empty { grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: var(--xl); }
+.customer-search-empty--raised { margin-top: var(--sm); }
+
+/* SALES FLOW */
+.sales-stepper { display: flex; gap: var(--sm); margin-bottom: var(--xl); }
+.sales-stepper__segment { flex: 1; height: 4px; border-radius: 2px; background: var(--border); transition: background 0.3s; }
+.sales-stepper__segment.active { background: var(--red); }
+.sales-search-box { margin-bottom: var(--md); max-width: 560px; }
+.sales-actions-row { display: flex; justify-content: flex-end; margin-bottom: var(--md); }
+.sales-customer-card { cursor: pointer; border: 1px solid var(--border); }
+.sales-customer-card.selected { border: 2px solid var(--red); }
+.sales-customer-shell { padding: var(--md); margin-bottom: var(--md); display: flex; align-items: center; gap: var(--md); }
+.sales-order-shell { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: var(--lg); align-items: start; }
+.sales-order-panel { padding: var(--lg); }
+.sales-order-summary { padding: var(--lg); }
+.sales-confirm-card { padding: var(--xl); text-align: center; }
+
 /* VEHICLE HEALTH HEADER */
-.vehicle-header { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--lg); margin-bottom: var(--xl); display: flex; align-items: center; gap: var(--md); }
-.vehicle-header__icon { width: 48px; height: 48px; background: var(--red-dim); border-radius: var(--r-lg); display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--red-bright); }
+.vehicle-header {
+  background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-card-low) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--lg);
+  margin-bottom: var(--xl);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: var(--md);
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+}
+.customer-page-header {
+  align-items: center;
+}
+.customer-page-header__title {
+  display: flex;
+  align-items: center;
+  gap: var(--sm);
+}
+.customer-page-header__action {
+  flex-shrink: 0;
+}
+.vehicle-header__icon {
+  width: 56px;
+  height: 56px;
+  background: radial-gradient(circle at 30% 30%, rgba(252,191,73,0.24), var(--red-dim));
+  border: 1px solid rgba(252,191,73,0.18);
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--amber);
+}
+.vehicle-health-hero__content { min-width: 0; }
+.vehicle-health-hero__title { font-weight: 700; color: var(--text-primary); line-height: 1.25; }
+.vehicle-health-hero__meta { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.vehicle-health-hero__action { flex-shrink: 0; }
+.vehicle-health-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: var(--xl); }
+.vehicle-health-empty { padding: var(--xl); text-align: center; }
+.vehicle-health-empty p { max-width: 44ch; margin-left: auto; margin-right: auto; }
+.vehicle-health-empty svg { display: block; margin-left: auto; margin-right: auto; }
 
 /* CUSTOMER PROFILE CARDS */
 .profile-shell { display: grid; grid-template-columns: 280px 1fr; gap: var(--lg); }
@@ -70,7 +143,19 @@
 @media (max-width: 768px) { .profile-shell { grid-template-columns: 1fr; } }
 
 /* TABS */
-.tab-row { display: flex; border-bottom: 1px solid var(--border); margin-bottom: var(--xl); gap: 2px; }
+.tab-row { display: flex; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: var(--xl); gap: 2px; overflow-x: auto; }
+.appointments-tab-row { padding-bottom: 2px; }
+.appointments-header-btn {
+  min-height: 44px;
+  padding: 0 var(--lg);
+  border-radius: var(--r-full);
+  box-shadow: var(--shadow-sm);
+  font-weight: 700;
+}
+.appointments-header-btn:hover:not(:disabled) {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
 .tab-btn {
   padding: var(--sm) var(--lg); font-size: 14px; font-weight: 600;
   color: var(--text-secondary); border: none; background: none; cursor: pointer;
@@ -84,6 +169,34 @@
 
 /* STATUS INDICATOR for appointments */
 .appt-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: var(--lg); margin-bottom: var(--md); display: flex; align-items: flex-start; justify-content: space-between; gap: var(--md); }
+.appointments-list-card { padding: var(--md); margin-bottom: var(--sm); display: flex; justify-content: space-between; align-items: flex-start; gap: var(--md); }
+.appointments-empty-card {
+  padding: var(--xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+.appointments-empty-card .empty-state {
+  width: 100%;
+  max-width: 420px;
+  padding: 0;
+}
+.appointments-empty-card .empty-state svg {
+  font-size: 48px;
+  margin-bottom: var(--md);
+}
+.appointments-empty-card .empty-state__title {
+  margin-bottom: var(--sm);
+}
+.appointments-empty-card .empty-state__sub {
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.appointments-empty-card .btn {
+  margin-top: var(--sm);
+}
 .appt-date  { font-size: var(--head-md); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
 .appt-month { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
 .appt-service { font-size: 14px; font-weight: 600; color: var(--text-primary); }
@@ -96,3 +209,23 @@
 .review-meta { display: flex; align-items: center; justify-content: space-between; margin-top: var(--md); }
 .review-author { font-size: 12px; font-weight: 600; color: var(--text-primary); }
 .review-date   { font-size: 11px; color: var(--text-muted); }
+
+@media (max-width: 768px) {
+  .customer-search-grid,
+  .sales-customer-grid,
+  .sales-order-shell { grid-template-columns: 1fr; }
+
+  .customer-page-header { gap: var(--md); }
+  .customer-page-header__action { width: 100%; }
+  .customer-page-header__action .btn { width: 100%; }
+  .vehicle-header { grid-template-columns: 1fr; }
+  .vehicle-health-hero__action { grid-column: 1 / -1; justify-self: start; }
+  .vehicle-health-stats { grid-template-columns: 1fr; }
+  .appt-card,
+  .appointments-list-card { flex-direction: column; }
+  .appointments-list-card > div:last-child { align-self: flex-end; }
+  .appointments-empty-card { min-height: 280px; padding: var(--lg); }
+  .appointments-empty-card .btn { width: 100%; }
+
+  .sales-stepper { gap: var(--xs); }
+}

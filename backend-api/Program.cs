@@ -65,10 +65,12 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
 
-    var adminExists = await db.Staff.AnyAsync(staff => staff.Role == "Admin");
-    if (!adminExists)
+    var isDevelopment = app.Environment.IsDevelopment();
+
+    var admin = await db.Staff.FirstOrDefaultAsync(staff => staff.Email.ToLower() == "admin@vehicleparts.com");
+    if (admin == null)
     {
-        db.Staff.Add(new Staff
+        admin = new Staff
         {
             FirstName = "Admin",
             LastName = "User",
@@ -76,14 +78,20 @@ using (var scope = app.Services.CreateScope())
             Role = "Admin",
             IsActive = true,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin@2025")
-        });
-        await db.SaveChangesAsync();
+        };
+        db.Staff.Add(admin);
+    }
+    else if (isDevelopment)
+    {
+        admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword("Admin@2025");
+        admin.Role = "Admin";
+        admin.IsActive = true;
     }
 
-    var staffExists = await db.Staff.AnyAsync(staff => staff.Email == "staff1@vehicleparts.com");
-    if (!staffExists)
+    var staff = await db.Staff.FirstOrDefaultAsync(item => item.Email.ToLower() == "staff1@vehicleparts.com");
+    if (staff == null)
     {
-        db.Staff.Add(new Staff
+        staff = new Staff
         {
             FirstName = "Staff",
             LastName = "Member",
@@ -91,14 +99,20 @@ using (var scope = app.Services.CreateScope())
             Role = "Staff",
             IsActive = true,
             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Staff@2025")
-        });
-        await db.SaveChangesAsync();
+        };
+        db.Staff.Add(staff);
+    }
+    else if (isDevelopment)
+    {
+        staff.PasswordHash = BCrypt.Net.BCrypt.HashPassword("Staff@2025");
+        staff.Role = "Staff";
+        staff.IsActive = true;
     }
 
-    var customerExists = await db.Customers.AnyAsync(customer => customer.Email == "cust1@vehicleparts.com");
-    if (!customerExists)
+    var customer = await db.Customers.FirstOrDefaultAsync(item => item.Email.ToLower() == "cust1@vehicleparts.com");
+    if (customer == null)
     {
-        db.Customers.Add(new Customer
+        customer = new Customer
         {
             FirstName = "Customer",
             LastName = "User",
@@ -110,9 +124,15 @@ using (var scope = app.Services.CreateScope())
             VehicleYear = 2019,
             VehicleType = "Sedan",
             PasswordHash = BCrypt.Net.BCrypt.HashPassword("Cust@2025!")
-        });
-        await db.SaveChangesAsync();
+        };
+        db.Customers.Add(customer);
     }
+    else if (isDevelopment)
+    {
+        customer.PasswordHash = BCrypt.Net.BCrypt.HashPassword("Cust@2025!");
+    }
+
+    await db.SaveChangesAsync();
 
     if (db.Database.CanConnect())
     {

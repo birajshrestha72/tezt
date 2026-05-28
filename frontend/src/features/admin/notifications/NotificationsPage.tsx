@@ -68,7 +68,7 @@ export default function NotificationsPage() {
   };
 
   const deleteNotif = async (id: number, wasUnread: boolean) => {
-    await fetch(`/api/notifications/${id}`, { method: 'DELETE' });
+    await notificationService.deleteNotification(id);
     setNotifications(prev => prev.filter(n => n.id !== id));
     if (wasUnread) setUnreadCount(c => Math.max(0, c - 1));
   };

@@ -122,24 +122,26 @@ export default function CustomerAppointments() {
 
   return (
     <div>
-      <div className="page-header">
+      <div className="page-header customer-page-header">
         <div>
           <h2 className="page-title">My Appointments</h2>
           <p className="page-subtitle">Service bookings and part requests</p>
         </div>
-        {tab === 'appointments' && (
-          <button className="btn btn-primary" onClick={() => { apptForm.reset({ serviceType: SERVICE_TYPES[0] }); setAddOpen(true); }}>
-            <MdAdd /> Book Appointment
-          </button>
-        )}
-        {tab === 'part-requests' && (
-          <button className="btn btn-primary" onClick={() => { partForm.reset(); setAddPartOpen(true); }}>
-            <MdAdd /> Request Part
-          </button>
-        )}
+        <div className="customer-page-header__action">
+          {tab === 'appointments' && (
+            <button type="button" className="btn btn-primary appointments-header-btn" onClick={() => { apptForm.reset({ serviceType: SERVICE_TYPES[0] }); setAddOpen(true); }}>
+              <MdAdd /> Book Appointment
+            </button>
+          )}
+          {tab === 'part-requests' && (
+            <button type="button" className="btn btn-primary appointments-header-btn" onClick={() => { partForm.reset(); setAddPartOpen(true); }}>
+              <MdAdd /> Request Part
+            </button>
+          )}
+        </div>
       </div>
 
-      <div className="tab-row">
+      <div className="tab-row appointments-tab-row">
         {([
           { key: 'appointments' as Tab, label: 'Appointments', icon: <MdCalendarToday /> },
           { key: 'part-requests' as Tab, label: 'Part Requests', icon: <MdBuild /> },
@@ -157,7 +159,7 @@ export default function CustomerAppointments() {
             <div key={k} className="skeleton" style={{ height: 80, borderRadius: 12, marginBottom: 8 }} />
           ))}
           {!loading && (appointments.length === 0) && (
-            <div className="card">
+            <div className="card appointments-empty-card">
               <EmptyState icon={<MdCalendarToday />} title="No appointments yet." action={{ label: 'Book Now', onClick: () => setAddOpen(true) }} />
             </div>
           )}
@@ -195,12 +197,12 @@ export default function CustomerAppointments() {
             <div key={k} className="skeleton" style={{ height: 80, borderRadius: 12, marginBottom: 8 }} />
           ))}
           {!loading && (partRequests.length === 0) && (
-            <div className="card">
+            <div className="card appointments-empty-card">
               <EmptyState icon={<MdBuild />} title="No part requests yet." action={{ label: 'Request a Part', onClick: () => setAddPartOpen(true) }} />
             </div>
           )}
           {!loading && partRequests.map(pr => (
-            <div key={pr.id} className="card" style={{ padding: 'var(--md)', marginBottom: 'var(--sm)', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <div key={pr.id} className="card appointments-list-card">
               <div>
                 <p style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>{pr.partName}</p>
                 {pr.description && <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>{pr.description}</p>}

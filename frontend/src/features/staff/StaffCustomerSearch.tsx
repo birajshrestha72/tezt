@@ -94,8 +94,8 @@ export default function StaffCustomerSearch() {
         </div>
       </div>
 
-      <div className="card" style={{ padding: 'var(--lg)', marginBottom: 'var(--xl)' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--md)' }}>
+      <div className="card customer-search-panel">
+        <div className="customer-search-fields">
           <div className="search-wrap">
             <MdSearch className="search-icon" />
             <input
@@ -139,24 +139,24 @@ export default function StaffCustomerSearch() {
       )}
 
       {!loading && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--md)' }}>
+        <div className="customer-search-grid">
           {customers.map(c => (
-            <div key={c.id} className="card" style={{ padding: 'var(--md)', display: 'flex', gap: 'var(--md)', alignItems: 'flex-start' }}>
+            <div key={c.id} className="card customer-search-card">
               <div className="avatar av-md" style={{ background: 'var(--info-bg)', color: 'var(--info)', fontWeight: 700, flexShrink: 0 }}>
                 {((c.firstName?.at(0) ?? '') + (c.lastName?.at(0) ?? '')).toUpperCase()}
               </div>
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <p style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>{c.firstName} {c.lastName}</p>
-                <p style={{ fontSize: 12, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
+              <div className="customer-search-card__content">
+                <p className="customer-search-card__name">{c.firstName} {c.lastName}</p>
+                <p className="customer-search-card__meta">
                   <MdEmail style={{ flexShrink: 0 }} />{c.email}
                 </p>
                 {c.phone && (
-                  <p style={{ fontSize: 12, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <p className="customer-search-card__meta">
                     <MdPhone style={{ flexShrink: 0 }} />{c.phone}
                   </p>
                 )}
                 {c.vehicleMake && (
-                  <p style={{ fontSize: 12, color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
+                  <p className="customer-search-card__meta">
                     <MdDirectionsCar style={{ flexShrink: 0 }} />{c.vehicleMake} {c.vehicleModel} {c.vehicleYear}
                   </p>
                 )}

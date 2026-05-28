@@ -27,6 +27,25 @@ interface NewCustForm {
   phone?: string;
 }
 
+function getUpdatedLineItem(
+  item: LineItem,
+  key: number,
+  field: keyof LineItem,
+  val: number | string,
+  products: ProductOption[]
+): LineItem {
+  if (item.key !== key) return item;
+  if (field === 'productId') {
+    const product = products.find(productOption => productOption.id === Number(val));
+    return {
+      ...item,
+      productId: val ? Number(val) : '',
+      unitPrice: product ? product.price : item.unitPrice,
+    };
+  }
+  return { ...item, [field]: val };
+}
+
 const STATUSES = ['Pending', 'Paid', 'Shipped', 'Cancelled'];
 const LOYALTY_THRESHOLD = 5000;
 const LOYALTY_RATE = 0.1;
@@ -78,16 +97,7 @@ export default function StaffSales() {
   const removeLine = (key: number) => setLines(l => l.filter(i => i.key !== key));
 
   const updateLine = (key: number, field: keyof LineItem, val: number | string) => {
-    setLines(prev =>
-      prev.map(item => {
-        if (item.key !== key) return item;
-        if (field === 'productId') {
-          const prod = products.find(p => p.id === Number(val));
-          return { ...item, productId: val ? Number(val) : '', unitPrice: prod ? prod.price : item.unitPrice };
-        }
-        return { ...item, [field]: val };
-      })
-    );
+    setLines(prev => prev.map(item => getUpdatedLineItem(item, key, field, val, products)));
   };
 
   const subtotal = lines.reduce((s, l) => s + (l.quantity || 0) * (Number(l.unitPrice) || 0), 0);
@@ -157,20 +167,16 @@ export default function StaffSales() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', gap: 'var(--sm)', marginBottom: 'var(--xl)' }}>
+      <div className="sales-stepper">
         {[1, 2, 3].map(n => (
-          <div key={n} style={{
-            flex: 1, height: 4, borderRadius: 2,
-            background: n <= step ? 'var(--red)' : 'var(--border)',
-            transition: 'background 0.3s',
-          }} />
+          <div key={n} className={`sales-stepper__segment${n <= step ? ' active' : ''}`} />
         ))}
       </div>
 
       {/* STEP 1 — Select Customer */}
       {step === 1 && (
         <div>
-          <div className="search-wrap" style={{ marginBottom: 'var(--md)', maxWidth: 560 }}>
+          <div className="search-wrap sales-search-box">
             <MdSearch className="search-icon" />
             <input
               className="search-input"
@@ -179,7 +185,7 @@ export default function StaffSales() {
               onChange={e => handleSearchChange(e.target.value)}
             />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 'var(--md)' }}>
+          <div className="sales-actions-row">
             <button type="button" className="btn btn-secondary btn-sm" onClick={() => { custForm.reset(); setAddCustOpen(true); }}>
               <MdPersonAdd /> Register New Customer
             </button>
@@ -190,31 +196,28 @@ export default function StaffSales() {
           ))}
 
           {!searchLoading && (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'var(--md)' }}>
+            <div className="sales-customer-grid">
               {searchResults.map(c => (
                 <button
                   key={c.id}
                   type="button"
-                  className="card"
-                  style={{
-                    padding: 'var(--md)', textAlign: 'left', cursor: 'pointer',
-                    border: selectedCust?.id === c.id ? '2px solid var(--red)' : '1px solid var(--border)',
-                    background: 'var(--bg-card)',
-                  }}
+                  className={`card sales-customer-card${selectedCust?.id === c.id ? ' selected' : ''}`}
                   onClick={() => { setSelectedCust(c); setStep(2); }}
                 >
-                  <p style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 2 }}>{c.firstName} {c.lastName}</p>
-                  <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>{c.email}</p>
-                  {c.phone && <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>{c.phone}</p>}
+                  <div className="sales-customer-card__content">
+                    <p className="sales-customer-card__name">{c.firstName} {c.lastName}</p>
+                    <p className="sales-customer-card__meta">{c.email}</p>
+                    {c.phone && <p className="sales-customer-card__meta">{c.phone}</p>}
+                  </div>
                 </button>
               ))}
               {(searchResults.length === 0) && searchQuery && (
-                <div style={{ gridColumn: '1 / -1', textAlign: 'center', color: 'var(--text-muted)', padding: 'var(--xl)' }}>
+                <div className="sales-customer-empty">
                   No customers found.
                 </div>
               )}
               {!searchQuery && (
-                <div style={{ gridColumn: '1 / -1', textAlign: 'center', color: 'var(--text-muted)', padding: 'var(--xl)' }}>
+                <div className="sales-customer-empty">
                   Type a name, email or phone to search customers.
                 </div>
               )}
@@ -226,7 +229,7 @@ export default function StaffSales() {
       {/* STEP 2 — Build Order */}
       {step === 2 && selectedCust && (
         <div>
-          <div className="card" style={{ padding: 'var(--md)', marginBottom: 'var(--md)', display: 'flex', alignItems: 'center', gap: 'var(--md)' }}>
+          <div className="card sales-customer-shell">
             <div className="avatar" style={{ background: 'var(--red-dim)', color: 'var(--red-bright)', fontWeight: 700 }}>
               {((selectedCust.firstName.at(0) ?? '') + (selectedCust.lastName.at(0) ?? '')).toUpperCase()}
             </div>
@@ -238,8 +241,8 @@ export default function StaffSales() {
           </div>
 
           <form onSubmit={orderForm.handleSubmit(onConfirmOrder)} noValidate>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 'var(--lg)', alignItems: 'start' }}>
-              <div className="card" style={{ padding: 'var(--lg)' }}>
+            <div className="sales-order-shell">
+              <div className="card sales-order-panel">
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--md)' }}>
                   <p style={{ fontWeight: 700, color: 'var(--text-primary)' }}>Order Items</p>
                   <button type="button" className="btn btn-secondary btn-sm" onClick={addLine}><MdAdd /> Add Item</button>
@@ -267,7 +270,7 @@ export default function StaffSales() {
                 ))}
               </div>
 
-              <div className="card" style={{ padding: 'var(--lg)' }}>
+              <div className="card sales-order-summary">
                 <p style={{ fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--md)' }}>Order Summary</p>
                 {hasLoyalty && (
                   <div style={{ marginBottom: 'var(--md)' }}>
@@ -314,7 +317,7 @@ export default function StaffSales() {
 
       {/* STEP 3 — Confirmation */}
       {step === 3 && result && (
-        <div className="card" style={{ padding: 'var(--xl)', textAlign: 'center' }}>
+        <div className="card sales-confirm-card">
           <MdCheckCircle style={{ fontSize: 64, color: 'var(--success)', marginBottom: 'var(--md)' }} />
           <p style={{ fontSize: 'var(--head-md)', fontWeight: 700, color: 'var(--text-primary)', marginBottom: 'var(--sm)' }}>
             Order #{result.order?.id} Created Successfully

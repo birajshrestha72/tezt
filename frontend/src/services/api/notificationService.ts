@@ -61,4 +61,9 @@ export const notificationService = {
     const response = await api.patch<ApiResponse<{ updated: number }>>('/notifications/read-all');
     return unwrap(response);
   },
+
+  async deleteNotification(id: number) {
+    const response = await api.delete<ApiResponse<{ deleted: boolean }>>(`/notifications/${id}`);
+    return unwrap(response);
+  },
 };
