@@ -137,7 +137,7 @@ export default function CustomerVehicleHealth() {
         <div className="card vehicle-health-empty">
           <MdAutoFixHigh style={{ fontSize: 48, color: 'var(--amber)', marginBottom: 'var(--md)' }} />
           <p style={{ color: 'var(--text-muted)', marginBottom: 'var(--lg)' }}>Run AI diagnostics to see vehicle health predictions.</p>
-          <button className="btn btn-primary" onClick={runDiagnostics}>Run Diagnostics</button>
+          <button className="btn btn-primary vehicle-health-empty__action" onClick={runDiagnostics}>Run Diagnostics</button>
         </div>
       )}
 

@@ -218,7 +218,7 @@ public class CustomersController : ControllerBase
         }
     }
 
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin,Staff,Customer")]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, UpdateCustomerDto dto)
     {
@@ -227,6 +227,11 @@ public class CustomersController : ControllerBase
             if (!ModelState.IsValid)
             {
                 return BadRequest(ApiResponse<object>.Fail("Invalid customer data."));
+            }
+
+            if (User.IsInRole("Customer") && GetCurrentUserId() != id)
+            {
+                return Forbid();
             }
 
             var customer = await _context.Customers.FirstOrDefaultAsync(item => item.Id == id);
@@ -302,6 +307,68 @@ public class CustomersController : ControllerBase
         catch (Exception ex)
         {
             return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to insert customers: {ex.Message}"));
+        }
+    }
+
+    [Authorize(Roles = "Customer,Admin,Staff")]
+    [HttpGet("me")]
+    public async Task<IActionResult> GetMe()
+    {
+        try
+        {
+            var userId = GetCurrentUserId();
+            if (userId is null) return Unauthorized(ApiResponse<object>.Fail("Unable to identify the current user."));
+
+            var customer = await _context.Customers.AsNoTracking().FirstOrDefaultAsync(c => c.Id == userId.Value);
+            if (customer == null) return NotFound(ApiResponse<object>.Fail("Customer not found."));
+
+            return Ok(ApiResponse<object>.Ok(MapCustomer(customer)));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to load customer profile: {ex.Message}"));
+        }
+    }
+
+    [Authorize(Roles = "Customer,Admin,Staff")]
+    [HttpPut("me")]
+    public async Task<IActionResult> UpdateMe(UpdateCustomerDto dto)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ApiResponse<object>.Fail("Invalid customer data."));
+            }
+
+            var userId = GetCurrentUserId();
+            if (userId is null) return Unauthorized(ApiResponse<object>.Fail("Unable to identify the current user."));
+
+            var customer = await _context.Customers.FirstOrDefaultAsync(item => item.Id == userId.Value);
+            if (customer == null) return NotFound(ApiResponse<object>.Fail("Customer not found."));
+
+            var emailExists = await _context.Customers.AnyAsync(item => item.Email == dto.Email && item.Id != customer.Id);
+            if (emailExists)
+            {
+                return BadRequest(ApiResponse<object>.Fail("Another customer already uses that email."));
+            }
+
+            customer.FirstName = dto.FirstName;
+            customer.LastName = dto.LastName;
+            customer.Email = dto.Email;
+            customer.Phone = dto.Phone;
+            customer.VehicleNumber = dto.VehicleNumber;
+            customer.VehicleMake = dto.VehicleMake;
+            customer.VehicleModel = dto.VehicleModel;
+            customer.VehicleYear = dto.VehicleYear;
+            customer.VehicleType = dto.VehicleType;
+
+            await _context.SaveChangesAsync();
+            return Ok(ApiResponse<object>.Ok(MapCustomer(customer), "Profile updated successfully."));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ApiResponse<object>.Fail($"Failed to update profile: {ex.Message}"));
         }
     }
 
