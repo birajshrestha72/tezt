@@ -1,0 +1,558 @@
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.Development.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.staticwebassets.endpoints.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.exe
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.deps.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.runtimeconfig.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.pdb
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Humanizer.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Build.Locator.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Design.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Relational.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Abstractions.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Memory.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyModel.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.OpenApi.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Mono.TextTemplating.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.CodeDom.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.AttributedModel.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Convention.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Hosting.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Runtime.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.TypedParts.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.AssemblyReference.cache
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rpswa.dswa.cache.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfoInputs.cache
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfo.cs
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.CoreCompileInputs.cache
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.sourcelink.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rjimswa.dswa.cache.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/scopedcss/bundle/VehiclePartsAPI.styles.css
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.json.cache
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.development.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.endpoints.json
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehicleP.D8D30309.Up2Date
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/refint/VehiclePartsAPI.dll
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.pdb
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.genruntimeconfig.cache
+C:/Users/Saksham Basnet/Downloads/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/ref/VehiclePartsAPI.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.exe
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Relational.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.OpenApi.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.Development.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.staticwebassets.endpoints.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Humanizer.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Build.Locator.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Design.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Abstractions.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Memory.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyModel.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Mono.TextTemplating.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.CodeDom.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.AttributedModel.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Convention.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Hosting.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Runtime.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.TypedParts.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.AssemblyReference.cache
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rpswa.dswa.cache.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfoInputs.cache
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfo.cs
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.CoreCompileInputs.cache
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cs
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cache
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.sourcelink.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rjimswa.dswa.cache.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/scopedcss/bundle/VehiclePartsAPI.styles.css
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.json.cache
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.development.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.endpoints.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehicleP.D8D30309.Up2Date
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/refint/VehiclePartsAPI.dll
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.pdb
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.deps.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.runtimeconfig.json
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.pdb
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.genruntimeconfig.cache
+C:/Users/acer/Desktop/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/ref/VehiclePartsAPI.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.AssemblyReference.cache
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfoInputs.cache
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfo.cs
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.CoreCompileInputs.cache
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cs
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cache
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.sourcelink.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/refint/VehiclePartsAPI.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.pdb
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.Development.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.staticwebassets.endpoints.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.deps.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.runtimeconfig.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.pdb
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/BCrypt.Net-Next.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/BouncyCastle.Cryptography.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Humanizer.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/MailKit.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Build.Locator.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Abstractions.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Memory.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyModel.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.OpenApi.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/MimeKit.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Mono.TextTemplating.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.CodeDom.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.AttributedModel.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Convention.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Hosting.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Runtime.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.TypedParts.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/scopedcss/bundle/VehiclePartsAPI.styles.css
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.development.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.endpoints.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.VehiclePartsAPI.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.VehiclePartsAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.build.VehiclePartsAPI.props
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.VehiclePartsAPI.props
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.VehiclePartsAPI.props
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.pack.json
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehicleP.D8D30309.Up2Date
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.genruntimeconfig.cache
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/ref/VehiclePartsAPI.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/biraj/Downloads/course-work-2-fantastic-five-f5/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.Development.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/appsettings.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.staticwebassets.endpoints.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.deps.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.runtimeconfig.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/VehiclePartsAPI.pdb
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/BCrypt.Net-Next.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/BouncyCastle.Cryptography.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Humanizer.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/MailKit.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.AspNetCore.OpenApi.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Build.Locator.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Design.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Relational.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Abstractions.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Caching.Memory.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Configuration.Abstractions.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.DependencyModel.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.Extensions.Primitives.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Abstractions.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Logging.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Microsoft.OpenApi.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/MimeKit.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Mono.TextTemplating.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.Swagger.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.CodeDom.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.AttributedModel.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Convention.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Hosting.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.Runtime.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.Composition.TypedParts.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/cs/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/de/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/es/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/fr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/it/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ja/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ko/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pl/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/pt-BR/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/ru/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.AssemblyReference.cache
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfoInputs.cache
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.AssemblyInfo.cs
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.csproj.CoreCompileInputs.cache
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cs
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.MvcApplicationPartsAssemblyInfo.cache
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.sourcelink.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/scopedcss/bundle/VehiclePartsAPI.styles.css
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.development.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.build.endpoints.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.VehiclePartsAPI.Microsoft.AspNetCore.StaticWebAssets.props
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.VehiclePartsAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.build.VehiclePartsAPI.props
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.VehiclePartsAPI.props
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.VehiclePartsAPI.props
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/staticwebassets.pack.json
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehicleP.D8D30309.Up2Date
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/refint/VehiclePartsAPI.dll
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.pdb
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/VehiclePartsAPI.genruntimeconfig.cache
+/Users/biraj/Documents/Projects/course-work-2-fantastic-five-f5/backend-api/obj/Debug/net9.0/ref/VehiclePartsAPI.dll
